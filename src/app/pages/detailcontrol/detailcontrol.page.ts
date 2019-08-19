@@ -35,22 +35,13 @@ export class DetailcontrolPage implements OnInit {
 
   ngOnInit() {
     this.control = 'parametros'; 
-
-    this.encuentro = this.route.snapshot.paramMap.get('encuentro');
-
-    /* this.encuentro = this.route.queryParams.subscribe( params=> {
-      this._encuentro = +params['encuentro'] ;
-      console.log(this._encuentro);
-    }); */
-   /*  this.encuentro = this.route.paramMap.pipe(
-      siwtchMap((params: ParamMap) =>{
-        
-      }) */
-    /* ) */
+    let encuentroObj = this.route.snapshot.paramMap.get('encuentroObj');
+    this.encuentro = JSON.parse(encuentroObj);
+    console.log('this.encuentro en detalle control:', this.encuentro);
   
 
     console.log(this.encuentro);
-    if(!this.encuentro.notas){
+    if(!this.encuentro.notas[0].valor_campo){
         this.notas = "no hay notas del doctor en este momento"
     }else{
       this.notas = this.encuentro.notas[0].valor_campo;

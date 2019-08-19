@@ -24,7 +24,8 @@ export class RecoverycodePage implements OnInit {
               public events: Events) { }
 
   ngOnInit() {
-    this.datos = this.router.snapshot.paramMap.get('datos');
+     const dataObj = this.router.snapshot.paramMap.get('dataObj');
+     this.datos = JSON.parse(dataObj);
     console.log('this.datos:', this.datos);
 
     this.formCode = this.form.group({

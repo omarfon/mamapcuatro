@@ -112,9 +112,8 @@ export class LoginPage implements OnInit {
             this.userSrv.sendValidation(email).subscribe(data =>{
               this.datos = data
               if(this.datos.result = 'ok'){
-                  this.router.navigate(['recoverycode',{
-                    datos: this.datos
-                  }])
+                let dataObj = JSON.stringify(this.datos);
+                  this.router.navigate(['recoverycode', dataObj])
               }else{
                   this.message = this.datos.error.message;
               }

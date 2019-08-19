@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="rosado">
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -64,13 +64,14 @@
                        </ion-item>
                 </div>
               <div class="center">
-                <button ion-button
-                        block
+                <ion-button
+                        size="block"
+                        color="rosado"
                          type="submit"
                          class="botonRecuperar"
                          [disabled]="!formCode.valid || !validacion()">
                    Recuperar
-                </button>
+                </ion-button>
               </div>
      </div>
     </form>

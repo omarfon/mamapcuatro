@@ -32,9 +32,8 @@ export class ControlesPage implements OnInit {
   goToDetail(encuentro){
     console.log('el encuentro en goToDetail', encuentro);
     /* console.log('ira detalle de encuentro'); */
-    this.routes.navigate(['detailcontrol',{
-      encuentro: encuentro
-    }])
+    let encuentroObj = JSON.stringify(encuentro)
+    this.routes.navigate(['detailcontrol', encuentroObj]);
   }
 
   createDate(){

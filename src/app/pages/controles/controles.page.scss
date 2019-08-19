@@ -1,3 +1,6 @@
+ion-content{
+  --background:#cbcbcb;
+}
 .especialidad{
     margin-right: 20px;
     color:#BABCC2;
@@ -37,7 +40,12 @@
     font-size:1.1em;
   }
   .tituloControles{
-    color:#BABCC2;
+    color:#000;
     text-align: center;
-    font-size:1.2em;
+    text-transform: uppercase;
+    font-size:1.3em;
+  }
+  ion-card{
+    border-top-right-radius: 50px;
+    --background:#fff;
   }

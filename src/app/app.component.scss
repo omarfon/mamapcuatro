@@ -4,3 +4,29 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+ion-content{
+    --background:#FFA28C!important;
+    --color:#fff;
+}
+.cabecera{
+    height: 200px;
+    text-align: center;
+}
+.circulo{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background: #fff;
+    margin-top:20px;
+    margin-left: calc( 50% - 50px);
+}
+.nombre{
+color:#000;
+}
+.correo{
+    color:#000;
+    margin-top:-10px;
+}
+.list-md, .item{
+    background:transparent;
+}
