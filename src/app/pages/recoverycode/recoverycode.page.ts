@@ -1,0 +1,107 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../service/user.service';
+import { AlertController, Events } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-recoverycode',
+  templateUrl: './recoverycode.page.html',
+  styleUrls: ['./recoverycode.page.scss'],
+})
+export class RecoverycodePage implements OnInit {
+
+  private datos;
+  public formCode: FormGroup;
+  private code;
+  public logeo;
+
+  constructor(public usrSrv: UserService,
+              public form: FormBuilder,
+              public alertCtrl: AlertController,
+              public router: ActivatedRoute,
+              public routes: Router,
+              public events: Events) { }
+
+  ngOnInit() {
+    this.datos = this.router.snapshot.paramMap.get('datos');
+    console.log('this.datos:', this.datos);
+
+    this.formCode = this.form.group({
+      primero : [],
+      segundo : [],
+      tercero : [],
+      cuarto  : [],
+      password   : ['', [Validators.required]],
+      passwordRepeat   : ['', [Validators.required]]
+  });
+
+  }
+  validacion(){
+    const valid = this.formCode.value;
+    if(valid.password == valid.passwordRepeat){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  saveData(){
+    let codigo = this.formCode.value;
+    // console.log('codigo:', codigo);
+    let uno = codigo.primero;
+    let dos = codigo.segundo;
+    let tres = codigo.tercero;
+    let cuatro = codigo.cuarto;
+    let code = uno + dos + tres + cuatro;
+    // console.log(code);
+    this.datos.code = code;
+    this.datos.password = this.formCode.value.password;
+    console.log('datos.code:', this.datos);
+    // this.datos.id = this.code.id;
+    // console.log('data armada:', this.datos);
+
+    this.usrSrv.recoveryLogin(this.datos).subscribe(data => {
+        this.logeo = data;
+         if(this.logeo.ok == false){
+          console.log('el logeo:', this.logeo);
+          /* const alert = this.alertCtrl.create({
+            header:`Error en la recuperación`,
+            message:`${this.logeo.error.message}`,
+            buttons: ['volver a intentar']
+          });
+          alert.present(); */
+        }else{
+          localStorage.setItem('usuario', this.logeo.userEmail);
+         localStorage.setItem('email', this.logeo.userEmail);
+         localStorage.setItem('authorization', this.logeo.authorization);
+         localStorage.setItem('id', this.logeo.patientId);
+         localStorage.setItem('role', this.logeo.role);
+         localStorage.setItem('photoUrl', this.logeo.photoUrl);
+         localStorage.setItem('patientName', this.logeo.patientName);
+          this.events.publish('user:logged', 'logged');
+            console.log('this.logeo:', this.logeo);
+            /* let alert = this.alertCtrl.create({
+              header:"Cuenta recuperada",
+              message:"su cuenta se ha recuperado exitosamente",
+              buttons: [
+                {
+                  text:'ok'
+                }
+              ]
+            })
+            alert.present(); */
+            /* this.navCtrl.setRoot(LoginPage); */
+            this.routes.navigate(['login']);
+        }
+      });
+}
+goToLogin(){
+  /* this.navCtrl.setRoot(LoginPage); */
+  this.routes.navigate(['login']);
+}
+
+  sendCode(){
+    console.log('enviar codigo');
+  }
+}

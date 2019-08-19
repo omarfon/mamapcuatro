@@ -1,0 +1,134 @@
+import { Component, OnInit } from '@angular/core';
+import { AuthoService } from '../../service/autho.service';
+import { UserService } from 'src/app/service/user.service';
+import { Router } from '@angular/router';
+import { AlertController, Events } from '@ionic/angular';
+import { DatosControlService } from '../../service/datos-control.service';
+import { TabsPage } from '../../tabs/tabs.page';
+
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
+})
+export class LoginPage implements OnInit {
+
+  public fecha;
+  public cantidad;
+  public startPregnancy:any;
+  public _startPregnancy:any;
+  public semanas;
+
+  public msgError: string;
+  private data;
+  private key;
+  public datos;
+  public message: "";
+
+  constructor( public autho: AuthoService,
+               public userSrv: UserService,
+               public alertCtrl: AlertController,
+               public router: Router,
+               public events: Events,
+               public datosSrv: DatosControlService) { }
+
+  ngOnInit() {
+    const authorization = localStorage.getItem('authorization');
+    if(!authorization){
+      this.autho.getKey().subscribe( (data:any) =>{
+        localStorage.setItem('authorization', data.authorization );
+        localStorage.setItem('role', data.role);
+      })
+    }
+  }
+
+  doSignIn(email, password){
+    console.log(email, password)
+    this.userSrv.doSignIn(email, password).subscribe(response =>{
+       this.data = response;
+      console.log('lo que me trae el login:', this.data);
+
+       localStorage.setItem('usuario', this.data.userEmail);
+       localStorage.setItem('email', this.data.userEmail);
+       localStorage.setItem('authorization', this.data.authorization);
+       localStorage.setItem('id', this.data.patientId);
+       localStorage.setItem('role', this.data.role);
+       localStorage.setItem('photoUrl', this.data.photoUrl);
+       localStorage.setItem('patientName', this.data.patientName);
+
+       this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
+        this._startPregnancy = data.fecha_ultima_regla;
+        console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy);
+        this.startPregnancy = this._startPregnancy;
+        console.log('this.startPregnancy de login:', this.startPregnancy);
+        if(this.startPregnancy){
+          localStorage.setItem('startPregnancy', this.startPregnancy);
+        }else{
+          localStorage.setItem('startPregnancy', '2019-05-01');
+        }
+        // console.log('lo que me trae el login:', localStorage)
+        this.events.publish('change:foto');
+      });
+       /* this.navCtrl.push(TabsPage); */
+       this.router.navigateByUrl('/tabs');
+    },
+    async error => {
+      const alert = await this.alertCtrl.create({
+        header:'',
+        message: "Email o Password incorrecto",
+        buttons: [{
+          text: "Volver a intentar",
+          handler: data => {
+            // console.log('intentar de nuevo');
+          }
+        }]
+      });
+      await alert.present();
+  		// this.msgError = error.message;
+    });
+
+  }
+
+  async goToRecovery(){
+    /* this.router.navigate(['register']); */
+    const alert = await this.alertCtrl.create({
+      header:'Olvidaste la Contraseña?',
+      subHeader: 'Ingresa tu email para recuperar la contraseña',
+      inputs: [
+        {
+          name: 'email',
+          type: 'text',
+          placeholder: 'Ingresa tu email'
+        }
+      ],
+      buttons:[
+        {
+          text: 'enviar',
+          cssClass: 'primary',
+          handler: data =>{
+            /* this.router.navigate(['home']); */
+            let email = data.email;
+            this.userSrv.sendValidation(email).subscribe(data =>{
+              this.datos = data
+              if(this.datos.result = 'ok'){
+                  this.router.navigate(['recoverycode',{
+                    datos: this.datos
+                  }])
+              }else{
+                  this.message = this.datos.error.message;
+              }
+            })
+          }
+        }
+      ]
+    })
+    await alert.present();
+  }
+
+  goToRegister(){
+    /* his.navCtrl.push(RegisterPage); */
+    this.router.navigate(['register']);
+  }
+
+}
