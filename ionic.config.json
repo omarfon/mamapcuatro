@@ -1,5 +1,7 @@
 {
   "name": "gestanteNew",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

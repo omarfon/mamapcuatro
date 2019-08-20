@@ -14,6 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth'
+import { firebaseConfig } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +31,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
             HttpClientModule, 
             BrowserAnimationsModule, 
             MaterialModule,
+            AngularFireModule.initializeApp(firebaseConfig),
+            AngularFireAuthModule,
+            AngularFirestoreModule
             ],
   providers: [
     StatusBar,
