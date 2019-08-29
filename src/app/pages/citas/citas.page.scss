@@ -24,6 +24,7 @@ ion-content {
     // margin-left: 2.5%;
 }
 .centerItemsDays {
+    margin-top:25px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -33,6 +34,9 @@ ion-content {
         color: #4A4A4A;
     }
 }
+.numeroDia{
+    margin-top:0px;
+}
 .doctor {
     font-weight: 200;
     color: #10A7C1;
@@ -41,6 +45,7 @@ ion-content {
     margin-right: 15px;
     line-height: 1.2em;
     margin-top: 10px;
+    margin-bottom:0px;
     text-transform: capitalize;
 }
 .especialidad {
@@ -50,6 +55,7 @@ ion-content {
     font-size: 1.3em;
     font-weight: lighter;
     margin-top: 0!important;
+    margin-bottom:0px;
     text-transform: capitalize;
 }
 .centro {
@@ -57,6 +63,7 @@ ion-content {
     margin-right: 15px;
     color: #a7a9ab;
     font-weight: 400;
+    margin-top:-5px;
 }
 .diasLibres {
     // margin-bottom: 0!important;
@@ -107,7 +114,7 @@ a {
 }
 .containerDays {
     width: 90%;
-   /*  height:90px; */
+    height:90px;
     margin-left: 5%;
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }

@@ -4,7 +4,7 @@ import { DataFinancerService } from './resolver/data-financer.service';
 
 
 const routes: Routes = [
-  /* { path: '', redirectTo: 'login', pathMatch: 'full' }, */
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   /* { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)}, */
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },

@@ -42,20 +42,13 @@ export class CitasPage implements OnInit {
     this.c = this.route.snapshot.paramMap.get('c');
     console.log(this.c);
     this.id=38;
-
-
-          this.fromDate = moment().format('YYYY-MM-DD');
-          this.toDate = moment(this.fromDate).add(6, 'days').format('YYYY-MM-DD');
+    this.fromDate = moment().format('YYYY-MM-DD');
+    this.toDate = moment(this.fromDate).add(6, 'days').format('YYYY-MM-DD');
 
     this.getDoctors();
   }
 
   getDoctors(){
-    /* let loading = this.loadingCtrl.create({
-                content: 'por favor espere'
-              });
-            loading.present(); */
-
           this.citasSrv.getServicios().subscribe ( servicios =>{
           this.servicios = servicios;
               });
@@ -79,16 +72,11 @@ export class CitasPage implements OnInit {
       this.doctorsF = this.doctors;
       console.log('this.doctors:', this.doctors);
     });
-    /* loading.dismiss(); */
+    
   }
 
   expandedItem(doctor, available) {
     if(!this.hora){
-      /* let loading = this.loadingCtrl.create({
-        content: 'Cargando horas disponibles...',
-        spinner: 'bubbles',
-      });
-      loading.present(); */
       console.log('doctor:', doctor, available);
       this.selectedDay = available;
       let id = doctor.id;
@@ -109,9 +97,6 @@ export class CitasPage implements OnInit {
           return listDoctor
         });
         this.horas = this.dias;
-        /* this.turnoManana = this.horas.filter(x =>x.hour < '15:20:00');
-        this.turnoTarde = this.horas.filter(x => x.hour > '15:00:00'); */
-
         /* loading.dismiss(); */
         console.log('las horas:', this.horas);
         this.dia = available.date;
@@ -125,7 +110,6 @@ export class CitasPage implements OnInit {
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, serviceId , fromDate, toDate).subscribe(hoy => {
-  
         console.log('hoy' , hoy);
         this.dias = hoy[0].hours;
         // console.log('this.dias:',this.dias);

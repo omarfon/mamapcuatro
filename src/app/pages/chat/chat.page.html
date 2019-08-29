@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar color="rosado">
+  <ion-toolbar color="light">
       <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-back-button></ion-back-button>
       </ion-buttons>
     <ion-title>chat</ion-title>
   </ion-toolbar>
@@ -36,7 +36,7 @@
 
 <ion-footer padding>
   <ion-item>
-    <ion-textarea [(ngModel)]="msg" autosize    class="message-input" value="ingresa tu mensaje">
+    <ion-textarea [(ngModel)]="msg" autosize class="message-input" value="ingresa tu mensaje">
     </ion-textarea>
     <ion-button expand="block" fill="clear" color="primary" class="msg-btn" (click)="sendMessage()">
       <ion-icon name="send" ></ion-icon>

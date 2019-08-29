@@ -55,8 +55,9 @@ export class DetailcontrolPage implements OnInit {
     let id = this.encuentro.encuentro;
 
     this.recipeSrv.getRecipes(id).subscribe((data:any)=>{
-      this.recipe = data;
-      if(this.recipes[0]){
+      this.recipes = data;
+      console.log(this.recipes);
+      if(!this.recipes[0]){
           console.log('no hay recetas para este control');
       }else{
           this.recetas = this.recipes[0].prescripciones;

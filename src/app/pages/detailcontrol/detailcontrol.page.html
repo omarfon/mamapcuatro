@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="verde">
+  <ion-toolbar color="rosado">
       <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
     </ion-buttons> 
@@ -79,6 +79,20 @@
                   </div>
       
                   <div *ngIf="recipes && recipe.cada_x_horas == 12">
+                    <p class="tituloDeLasTomas"> tomas de 2 veces por día</p>
+                    <ion-row padding>
+                      <ion-col class="cuadrados">
+                        <p> 6am-9am</p>
+                        <p class="cantidad">{{recipe.cantidad_dosis}}</p>
+                      </ion-col>
+                      <ion-col class="cuadrados">
+                        <p>6pm-9m</p>
+                        <p class="cantidad"> {{recipe.cantidad_dosis}} </p>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+
+                  <div *ngIf="recipes && recipe.cada_x_horas == 13">
                     <p class="tituloDeLasTomas"> tomas de 2 veces por día</p>
                     <ion-row padding>
                       <ion-col class="cuadrados">

@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Renderer, ViewChild, ElementRef } from '@angu
 })
 export class ExpandableComponent implements OnInit {
 
-  /* @ViewChild('expandWrapper', {static: false}) expandWrapper; */
+  @ViewChild('expandWrapper', {static: false}) expandWrapper;
   @Input('expanded') expanded;
   @Input('expandedlow') expandedlow;
   @Input ('expandHeight') expandHeight;
