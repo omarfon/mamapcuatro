@@ -40,8 +40,12 @@ export class FinancerPage implements OnInit {
     const data = this.route.snapshot.paramMap.get('datosObj');
     this.dataArmada = JSON.parse(data);
     console.log('dataArmada en financer:', this.dataArmada);
+    this.hora = this.dataArmada.hora;
+    this.doctor = this.dataArmada.doctor;
 
-    this.getPlanesPacienteConPrecio();
+    if(this.dataArmada){
+      this.getPlanesPacienteConPrecio();
+    }
   }
 
 
@@ -51,7 +55,6 @@ export class FinancerPage implements OnInit {
     let prestacion_id = this.dataArmada.prestacion;
     let medico_id = this.dataArmada.medico_id;
     let proposedate = this.dataArmada.proposedate
-
     this.financerSrv.getPlanesPaciente(centerId , servicio_id, prestacion_id , medico_id , proposedate ).subscribe(data =>{
       this.planes = data;
       console.log('this.planes:', this.planes);

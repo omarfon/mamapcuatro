@@ -127,11 +127,7 @@ export class CitasPage implements OnInit {
     }
   }
 
-  /* goToResumen(doctor , hora){
-    console.log('available de cita:',hora);
-    this.navCtrl.push(ResumenPage, {available:this.selectedDay, doctor: doctor , hora:hora});
-    this.navCtrl.push (FinancerPage, {available:this.selectedDay , doctor: doctor, hora: hora});
-  } */
+
   
   goToFinancer(doctor, hora){
     console.log('hora y doctor', hora, doctor);
@@ -140,19 +136,16 @@ export class CitasPage implements OnInit {
       servicio_id: hora.params.serviceId,
       prestacion: hora.params.provisionId,
       medico_id: doctor.id,
-      proposedate: this.selectedDay.date
+      proposedate: this.selectedDay.date,
+      hora: hora,
+  /*     doctor: doctor */
+
     }
     const datosObj = JSON.stringify(datos);
     console.log('data armada', datosObj);
       this.routes.navigate(['financer', datosObj]);
   
 
- /*  setFinancer(){
-    let available = this.available;
-    let hora: hora;
-    let doctor: DocumentOrShadowRoot;
-    this.finanSrv.guardardatos(available, doctor, hora){
-*/
     } 
 
   }
