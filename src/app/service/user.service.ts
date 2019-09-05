@@ -10,6 +10,7 @@ import {map} from 'rxjs/operators'
 export class UserService {
 
   private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER2 = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/auth/login-firebase"
   private apiUrl = `${this.SERVER}`;
   private apiUrlDatos = `${this.SERVER}ebooking/`;
 
@@ -20,7 +21,7 @@ export class UserService {
     let headers = new HttpHeaders({'Authorization': authorization});
 
     let params = {email: email, password: password}
-      return this.http.post(this.apiUrl + 'users/login', params, {headers}).pipe( 
+      return this.http.post(this.SERVER2 , params, {headers}).pipe( 
               map(data =>{
               return data
         })

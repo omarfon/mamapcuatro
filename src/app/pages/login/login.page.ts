@@ -65,6 +65,7 @@ export class LoginPage implements OnInit {
        localStorage.setItem('role', this.data.role);
        localStorage.setItem('photoUrl', this.data.photoUrl);
        localStorage.setItem('patientName', this.data.patientName);
+       localStorage.setItem('token', this.data.firebaseToken);
 
        this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
         this._startPregnancy = data.fecha_ultima_regla;

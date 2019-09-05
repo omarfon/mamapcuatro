@@ -72,19 +72,17 @@ export class CitasPage implements OnInit {
       this.doctorsF = this.doctors;
       console.log('this.doctors:', this.doctors);
     });
-    
   }
 
   expandedItem(doctor, available) {
     if(!this.hora){
-      console.log('doctor:', doctor, available);
+      console.log('doctor y available:', doctor, available);
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, serviceId , fromDate, toDate).subscribe(hoy => {
-  
         console.log('hoy' , hoy);
         this.dias = hoy[0].hours;
         // console.log('this.dias:',this.dias);

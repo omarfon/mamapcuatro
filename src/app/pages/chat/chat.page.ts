@@ -23,20 +23,19 @@ export class ChatPage implements OnInit {
   currentUser = 'Claudia';
   @ViewChild(IonContent, {static: false}) content: IonContent;
 
-  constructor(public chatSrv: ChatService) { }
+  constructor(public chatSrv: ChatService) {}
 
   ngOnInit() {
-    let uid = "20FFllkKtAMLB2pa191JYxrDsr62";
-    localStorage.setItem('uid', uid);
-    if(localStorage.getItem('uid')){
-      this.uid = localStorage.getItem('uid');
+    if(localStorage.getItem('token') && !localStorage.getItem('uid')){
+      this.chatSrv.registerForCustom();
+    }else{
       this.obtenerConversacion();
     }
   }
 
   obtenerConversacion(){
-    /* this.chat = chat; */
-    const uid = this.uid;
+    console.log(this.conversacion);
+    const uid = localStorage.getItem('uid');
     this.chatSrv.getChatRoom(uid).subscribe( room =>{
       this.conversacion = room;
       console.log('this.conversacion:',this.conversacion);
@@ -46,6 +45,7 @@ export class ChatPage implements OnInit {
     },300)
   }
 
+  
   sendMessage(){
     const mensaje : Message ={
       content: this.msg,

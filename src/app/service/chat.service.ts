@@ -21,7 +21,6 @@ export class ChatService {
   constructor(public db: AngularFirestore,
     public ad: AngularFireAuth) { }
 
-
     getChatRoom(uid){
       console.log(uid);
        return this.db.collection('chatsRooms').doc(uid).valueChanges()
@@ -32,11 +31,51 @@ export class ChatService {
        messages: firestore.FieldValue.arrayUnion(message),
      })
    }
+
+
+   registerForCustom(){
+     let registrar = localStorage.getItem('uid')
+     if(registrar){
+       console.log('ya no registrara');
+     }else{
+       let token = localStorage.getItem('token')
+        return new Promise((resolve, reject)=>{
+          this.ad.auth.signInWithCustomToken(token).then(resolve =>{
+             console.log(resolve);
+             let data = resolve;
+             localStorage.setItem('uid', data.user.uid);
+             if(localStorage.getItem('uid')){
+               const uid = localStorage.getItem('uid');
+               const id = localStorage.getItem('id');
+               const email = localStorage.getItem('email');
+               this.db.collection('chatsRooms').doc(uid).set({
+                 id:uid,
+                 name: localStorage.getItem('patientName'),
+                 uid: uid,
+                 role: "user",
+                 datos:
+                   {
+                     patientid:id,
+                     email:email,
+                   }
+                 
+               }).then(result =>{
+                 console.log('resultado de la escritura:', result);
+               }).catch(err =>{
+                 console.log(err, 'error de no escritura');
+               })
+             }
+          }).catch(err => reject(err))
+        });
+     }
+   }
    
-     registerUser(email, password){
+
+   
+    /*  registerUser(email, password){
        return new Promise((resolve, reject)=>{
-         this.ad.auth.createUserWithEmailAndPassword(email , password).then(res =>{
-           const uid = res.user.uid;
+         this.ad.auth.createUserWithEmailAndPassword(email , password).then(resolve =>{
+           const uid = resolve.user.uid;
            this.db.collection('chatsRooms').doc(uid).set({
              id:uid,
              name: localStorage.getItem('patientName'),
@@ -48,7 +87,7 @@ export class ChatService {
            })
        }).catch(err => reject(err));
      });
-     }
+     } */
    
      loginEmailUser(email, password){
          return new Promise((resolve, reject)=>{
