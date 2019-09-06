@@ -8,61 +8,62 @@
 </ion-header>
 
 <ion-content>
-    <h4 class="parrafoFinanciador">Escoge el financiador, ya casi terminamos…</h4>
-    <div class="contenedorPagadores" *ngIf= "planes">
-        <ion-list no-lines>
-          <div *ngFor="let plan of planes">
-            <ion-card *ngIf="plan.es_paquete == 0 ">
-              <ion-item >
-                  <ion-checkbox checked="isChecked" (click)="acceptFinancer(plan)"
-                  ></ion-checkbox>
-                  <ion-label>{{plan.plan_desc}}</ion-label>
-                  <span item-right>
-                    <p>S/. {{plan.precio[0].total}}</p>
-                  </span>
-              </ion-item>
-            </ion-card>  
-           <!--  <ng-template #noprice>
-              <p class="noprice">Este precio aun no ha sido asignado en el sistema, reintente en algunos minutos</p>
-            </ng-template> -->
-              <ion-list *ngIf="plan.es_paquete == 1" no-lines>
-                <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
-                <ion-card *ngFor="let beneficio of plan.beneficios">
-                  <ion-item class="bloques" no-lines>
-                      <ion-checkbox checked="isChecked" (click)="acceptFinancerPaquete(plan)"></ion-checkbox>
-                        <ion-label>{{beneficio.beneficio_paquete}}</ion-label>
-                        <span item-right>
-                          <p>{{beneficio.cantidad_veces}} / {{beneficio.cantidad_max}}</p>
-                        </span>
-                    </ion-item>
-                </ion-card>  
-           <!--        <hr> -->
-                </ion-list>
+  <div class="containerPay">
+
+    <h3 class="centerTitle">Como quieres pagar?</h3>
+    
+          <div class="contenedorPagadores" *ngIf= "planes">
+            <ion-list>
+              <div *ngFor="let plan of planes">
+                <ion-item *ngIf="plan.precio.length > 0 ; else noprice">
+                    <ion-checkbox checked="isChecked" (click)="acceptFinancer(plan)"
+                    ></ion-checkbox>
+                    <ion-label>{{plan.plan_desc}}</ion-label>
+                    <span item-right>
+                      <p>S/. {{plan.precio[0].total}}</p>
+                    </span>
+                </ion-item>
+                <ng-template #noprice>
+                  <p class="noprice">Este precio aun no ha sido asignado en el sistema, reintente en algunos minutos</p>
+                </ng-template>
+                
+                  <ion-list *ngIf="plan.beneficios">
+                    <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
+                    <ion-item *ngFor="let beneficio of plan.beneficios" >
+                        <ion-checkbox checked="isChecked" (click)="acceptFinancer(plan)"></ion-checkbox>
+                          <ion-label>{{beneficio.beneficio_paquete}}</ion-label>
+                          <span item-right>
+                            <p>{{beneficio.cantidad_veces}} / {{beneficio.cantidad_max}}</p>
+                          </span>
+                      </ion-item>
+                      <hr>
+                    </ion-list>
+              </div>
+            </ion-list>  
           </div>
-        </ion-list>  
-      </div>
+ </div>
 
-<ion-button *ngIf="paquete == false"
-      color="primary"
-      ion-button
-      size="block"
-      center
-      class="botonPagar"
-      (click)="goToPay()"
-      [disabled]="!desabilitado == true">
-  Ir a Pago
-</ion-button>
+  <button 
+          color="secondary"
+          ion-button
+          block
+          center
+          class="botonPagar"
+          (click)="goToPay()"
+          [disabled]="!desabilitado == true">
+      hacer el pago
+</button>
 
-   <ion-button *ngIf="paquete == true"
-    color="primary"
-    ion-button
-    size="block"
-    center
-    class="botonPagar"
-    (click)="pagePaquete()"
-    [disabled]="!desabilitado == true">
-    reservar cita
-  </ion-button>
+   <button *ngIf="paquete == true" 
+  color="secondary"
+  ion-button
+  block
+  center
+  class="botonPagar"
+  (click)="next()"
+  [disabled]="!desabilitado == true">
+  hacer el pago
+</button> 
 
 
 </ion-content>

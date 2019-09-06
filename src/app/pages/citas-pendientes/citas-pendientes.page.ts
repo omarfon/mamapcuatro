@@ -15,15 +15,16 @@ export class CitasPendientesPage implements OnInit {
               public routes: Router) { }
 
   ngOnInit() {
+    
     this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
     })
   }
 
   goToDetailDate(date){
-    this.routes.navigate(['detailpage',{
-        date:date
-    }])
+    const datosObj = JSON.stringify(date);
+    console.log('data armada', datosObj);
+    this.routes.navigate(['detailpage', datosObj]);
   }
 
 }

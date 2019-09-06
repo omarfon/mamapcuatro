@@ -138,7 +138,13 @@ export class CitasPage implements OnInit {
       medico_id: doctor.id,
       proposedate: this.selectedDay.date,
       hora: hora,
-  /*     doctor: doctor */
+      doctor: {
+        id:doctor.id,
+        fullname:doctor.fullName,
+        info: doctor.info,
+        service: doctor.service,
+        cmp: doctor.cmp
+      } 
 
     }
     const datosObj = JSON.stringify(datos);

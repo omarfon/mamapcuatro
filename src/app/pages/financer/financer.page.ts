@@ -39,9 +39,10 @@ export class FinancerPage implements OnInit {
   ngOnInit() {
     const data = this.route.snapshot.paramMap.get('datosObj');
     this.dataArmada = JSON.parse(data);
-    console.log('dataArmada en financer:', this.dataArmada);
     this.hora = this.dataArmada.hora;
     this.doctor = this.dataArmada.doctor;
+    console.log('dataArmada en financer:', this.dataArmada);
+    console.log('dataArmada en doctor:', this.dataArmada.doctor);
 
     if(this.dataArmada){
       this.getPlanesPacienteConPrecio();
@@ -63,23 +64,22 @@ export class FinancerPage implements OnInit {
 
   goToPay(){
     /* console.log('me envia a pagos'); */
-    let available = this.available;
-    let hora = this.hora;
-    let doctor = this.doctor;
-    let plan = this.plan;
-    this.routes.navigate(['resumen',{
-      available:available,
-      hora: hora,
-      doctor: doctor,
-      plan:plan
-    }])
-    /* this.navCtrl.push(ResumenPage,  {available: available, hora: hora, doctor: doctor, plan: plan}) */
+    const datos = {
+       available : this.available,
+       hora : this.hora,
+       doctor : this.doctor,
+       plan : this.plan,
+    }
+    const datosObj = JSON.stringify(datos);
+    console.log('data armada', datosObj);
+    this.routes.navigate(['resumen', datosObj])
+    
   }
 
   acceptFinancer(plan){
     this.desabilitado = !this.desabilitado;
     this.plan = plan;
-    console.log('el plan:', plan);
+ /*    console.log('el plan:', plan); */
     this.price =  plan.precio[0].total ;
     this.nomark = true;
     this.paquete = false;
@@ -90,8 +90,8 @@ export class FinancerPage implements OnInit {
     this.desabilitado  = !this.desabilitado;
     this.paquete = true ;
     this.desabilitado = true;
-
   }
+
 
    pagePaquete(){
     console.log('aqui se va defrente a pagar paquete con todos los datos');
@@ -99,10 +99,10 @@ export class FinancerPage implements OnInit {
     let subida = this.hora.listjson;
     console.log('datos antes de pagar:', provisionId, this.subida, this.hora);
     
-       this.appointmentSrv.createAppointment(subida , provisionId).subscribe((data:any) => {
+       this.appointmentSrv.createAppointment(subida , provisionId).subscribe(async (data:any) => {
         console.log('data devuelta:', data);
-         /* if(data.ok == false){
-          const alert = this.alertCtrl.create({
+         if(data.ok == false){
+          const alert = await this.alertCtrl.create({
               header:'Problema de reserva',
               message:`${data.error.help}`,
               buttons: [
@@ -119,13 +119,13 @@ export class FinancerPage implements OnInit {
               }
             ]
           });
-          alert.present();
+          await alert.present();
         } else{
-            const loading =  this.loadingCtrl.create({
+            const loading =  await this.loadingCtrl.create({
               message: "creando cita"
             });
             await loading.present();
-            alert = await this.alertCtrl.create({
+            const alert = await this.alertCtrl.create({
             header: "Creación de cita",
             subHeader: "la cita que reservaste ha sido creada satisfactoriamente.",
             buttons: [
@@ -138,7 +138,7 @@ export class FinancerPage implements OnInit {
           loading.dismiss();
           alert.present();
           this.routes.navigate(['home'])
-        }  */
+        } 
     });  
   }
 

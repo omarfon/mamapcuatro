@@ -23,9 +23,10 @@ const routes: Routes = [
   { path: 'detailcontrol/:encuentroObj', loadChildren: './pages/detailcontrol/detailcontrol.module#DetailcontrolPageModule' },
   { path: 'recoverycode/:dataObj', loadChildren: './pages/recoverycode/recoverycode.module#RecoverycodePageModule' },
   { path: 'recetas', loadChildren: './pages/recetas/recetas.module#RecetasPageModule' },
-  { path: 'detailpage', loadChildren: './pages/detailpage/detailpage.module#DetailpagePageModule' },
+  { path: 'detailpage/:datosObj', loadChildren: './pages/detailpage/detailpage.module#DetailpagePageModule' },
   { path: 'graficas', loadChildren: './pages/graficas/graficas.module#GraficasPageModule' },
   { path: 'resumen', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
+  { path: 'resumen/:datosObj', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
 ];
 
 @NgModule({
