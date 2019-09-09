@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentService } from '../../service/appointment.service';
 import { AlertController, LoadingController} from '@ionic/angular';
 import { DataFinancerService } from '../../resolver/data-financer.service';
+import { ConsoleReporter } from 'jasmine';
 
 
 
@@ -27,6 +28,7 @@ export class FinancerPage implements OnInit {
   public subida;
   public datos;
   public dataArmada;
+  desactivadoBotonLocal: boolean;
 
   constructor(public routes : Router,
               public route: ActivatedRoute,
@@ -34,13 +36,16 @@ export class FinancerPage implements OnInit {
               public financerSrv: FinancerService,
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
-              public financerdatSrv: DataFinancerService) { }
+              public financerdatSrv: DataFinancerService,
+              public appointmentProvider: AppointmentService) { }
 
   ngOnInit() {
     const data = this.route.snapshot.paramMap.get('datosObj');
     this.dataArmada = JSON.parse(data);
     this.hora = this.dataArmada.hora;
     this.doctor = this.dataArmada.doctor;
+    this.subida = this.dataArmada.hora.listjson;
+    /* this.available = this.dataArmada. */
     console.log('dataArmada en financer:', this.dataArmada);
     console.log('dataArmada en doctor:', this.dataArmada.doctor);
 
@@ -55,7 +60,7 @@ export class FinancerPage implements OnInit {
     let servicio_id = this.dataArmada.servicio_id;
     let prestacion_id = this.dataArmada.prestacion;
     let medico_id = this.dataArmada.medico_id;
-    let proposedate = this.dataArmada.proposedate
+    let proposedate = this.dataArmada.proposedate;
     this.financerSrv.getPlanesPaciente(centerId , servicio_id, prestacion_id , medico_id , proposedate ).subscribe(data =>{
       this.planes = data;
       console.log('this.planes:', this.planes);
@@ -65,7 +70,7 @@ export class FinancerPage implements OnInit {
   goToPay(){
     /* console.log('me envia a pagos'); */
     const datos = {
-       available : this.available,
+       available : this.dataArmada.proposedate,
        hora : this.hora,
        doctor : this.doctor,
        plan : this.plan,
@@ -141,5 +146,57 @@ export class FinancerPage implements OnInit {
         } 
     });  
   }
+
+  next() {
+    const provisionId = this.hora.params.provisionId;
+    console.log('datos en next:',this.subida, provisionId);
+    this.desactivadoBotonLocal = false;
+      this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
+        console.log('data devuelta:', data);
+        if(data.ok == false){
+          const alert = await this.alertCtrl.create({
+              header:"Problema de reserva",
+              subHeader:`${data.error.help}`,
+              buttons: [
+                {
+                text: 'Buscar otro horario',
+                handler: ()=>{
+                  /* this.navCtrl.push(CardPage); */
+                  this.routes.navigate(['tabs']);
+                }
+              },{
+                text: 'cancelar',
+                handler: ()=>{
+                  this.routes.navigate(['home']);
+                  /* this.navCtrl.push(HomePage); */
+                }
+              }
+            ]
+          });
+          alert.present();
+        }else{
+            const loading = await this.loadingCtrl.create({
+              message: "creando cita"
+            });
+            loading.present();
+            const alert = await this.alertCtrl.create({
+            header: "Creación de cita",
+            subHeader: "la cita que reservaste ha sido creada satisfactoriamente.",
+            buttons: [
+              {
+                text: "Ok",
+                role: "Cancel"
+              }
+            ]
+          });
+          loading.dismiss();
+          await alert.present();
+          /* this.navCtrl.setRoot(HomePage); */
+          this.routes.navigate(['tabs']);
+        } 
+    });  
+  }
+
+  
 
 }

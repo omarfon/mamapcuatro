@@ -38,7 +38,7 @@ export class ResumenPage implements OnInit {
 
   public doctor; //doctor seleccionado//
   public available; //fecha seleccionada//
-  private hora; // fecha seleccionada
+  public hora; // fecha seleccionada
   /* private culqiData; */
   private prestacion;
   /* private SERVERImage = Constants.IMAGESDOCTORS; */
@@ -74,6 +74,7 @@ export class ResumenPage implements OnInit {
       this.price = this.dataArmada.plan.precio[0].total;
       this.subida = this.dataArmada.hora.listjson;
       this.plan = this.dataArmada.plan.plan_desc;
+      this.available = this.dataArmada.available;
   }
   
   async culqi(){
@@ -437,35 +438,81 @@ export class ResumenPage implements OnInit {
         } 
     });  
   }
-  
 
-
-  /* nextDepe() {
+  async gotosave(){
     this.desactivadoBotonLocal = false;
-    let id = this.depe._id;
-    let provisionId = this.hora.params.provisionId;
-    console.log('el id que va para creacion de familiar:', id)
-    this.crudPvr.createParentDate(this.subida, id, provisionId).subscribe(data => {
-      let loading = this.loadingCtrl.create({
-        content: "creando cita"
+    const providerId = this.hora.params.provisionId;
+    console.log('this.providerId:', providerId);
+    this.appointmentProvider.createAppointment(this.subida, providerId).subscribe(async (data: any) => {
+      // console.log('data de masterDetail:', data);
+      const loading = await this.loadCtrl.create({
+        message: 'Creando cita...'
       });
       loading.present();
-      let alert = this.alertCtrl.create({
-        title: "Creación de cita",
-        subTitle: "la cita que reservaste ha sido creada satisfactoriamente.",
+      /* this.navCtrl.setRoot(TabsPage); */
+      this.router.navigate(['tabs']);
+      loading.dismiss();
+      const alert = await this.alertCtrl.create({
+        header: 'Cita creada',
+        subHeader: 'Su cita se ha creado satisfactoriamente',
         buttons: [
           {
-            text: "Ok",
-            role: "Cancel"
+            text: 'Ok',
+            handler: data => {
+            }
           }
         ]
       });
-      loading.dismiss();
       alert.present();
-      this.navCtrl.setRoot(HomePage);
-    });
-    
-  } */
+    },
+      err => {
+        console.log('error de masterDetail:', err);
+        const code = err.error.data.errorCode;
+        let alert;
+        /* switch (code) {
+          case 15006:
+            // case 15035:
+            const alert = this.alertCtrl.create({
+              header: 'Aviso al Cliente',
+              subHeader: 'Ya tienes una cita en una hora cercana a esta.',
+              buttons: [
+                {
+                  text: 'Buscar otra hora',
+                  handler: data => {
+                    this.router.navigate(['citas-pendientes']);
+                  }
+                }
+              ]
+            });
+            const alert.present();
+            break;
+
+          case 15009:
+            const alert = await this.alertCtrl.create({
+              header: 'Aviso al Cliente',
+              subHeader: 'El horario escogido ya fue tomado .',
+              buttons: [
+                {
+                  text: 'Buscar otra hora',
+                  handler: data => {
+                    this.router.navigate(['citas-pendientes']);
+                  }
+                }
+              ]
+            });
+            alert.present();
+            break;
+
+          default:
+            break;
+        } */
+      }
+    );
+  }
+  
+
+
+
 
   goBack(){
     /* this.navCtrl.pop(); */

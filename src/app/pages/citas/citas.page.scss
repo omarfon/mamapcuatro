@@ -207,3 +207,20 @@ a:hover {
     margin-top:0!important;
     margin-bottom:2px;
 }
+mat-expansion-panel-header{
+    height: 80px!important;
+}
+mat-expansion-panel{
+    box-shadow: none!important;
+    .mat-expansion-indicator{
+        display: none!important;
+        color:transparent!important;
+    }
+}
+.diasDoctor{
+    margin-top:2px;
+    margin-left:3px;
+}
+.contenedorHoras{
+    height: 50px;
+}

@@ -50,7 +50,7 @@ export class AppointmentService {
     let headers = new HttpHeaders({"Authorization": authorization});
     // appointment.email = localStorage.getItem('emailUser'); appointment.password = localStorage.getItem('passUser');
 
-    return this.http.delete(this.apiUrl + `appointments/${appointment.appointmentId}`, {headers}).pipe(
+    return this.http.delete(this.apiUrl + `appointments/${appointment}`, {headers}).pipe(
                     map( data => {
                       return data;
                     })
