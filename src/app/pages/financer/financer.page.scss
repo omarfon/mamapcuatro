@@ -1,5 +1,5 @@
 ion-content{
-  background: rgb(231, 231, 231)!important;
+  --background: rgb(231, 231, 231)!important;
 }
 .visa {
   background-repeat: no-repeat;
@@ -24,7 +24,7 @@ ion-content{
   margin-left: 5%!important;
 }
 .evaluate {
-  background-color: #fff!important;
+ /*  background-color: #fff!important; */
   width: 90%;
   margin-left: 5%;
   border: none!important;
@@ -260,7 +260,7 @@ h3{
  }
 }
 .contenedorPagadores{
-  background: rgba(255, 255, 255, 0.9);
+  /* background: rgba(255, 255, 255, 0.9); */
   width: 90%;                                                                                      
   margin-left: 5%;
   margin-bottom:20px;
@@ -306,4 +306,7 @@ ion-slides{
     margin-left: 10%;
     font-size: 1.6em;
     font-weight: 400;
+}
+.list-md{
+  background: transparent!important;
 }

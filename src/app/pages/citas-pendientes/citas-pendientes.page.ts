@@ -12,7 +12,12 @@ export class CitasPendientesPage implements OnInit {
   public dates;
 
   constructor(public appointmetSrv: AppointmentService,
-              public routes: Router) { }
+              public routes: Router) { 
+
+                this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+      return this.dates = data;
+    })
+              }
 
   ngOnInit() {
     

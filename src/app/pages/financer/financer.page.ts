@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentService } from '../../service/appointment.service';
 import { AlertController, LoadingController} from '@ionic/angular';
 import { DataFinancerService } from '../../resolver/data-financer.service';
-import { ConsoleReporter } from 'jasmine';
+
 
 
 
@@ -29,6 +29,7 @@ export class FinancerPage implements OnInit {
   public datos;
   public dataArmada;
   desactivadoBotonLocal: boolean;
+  public financer: boolean;
 
   constructor(public routes : Router,
               public route: ActivatedRoute,
@@ -82,19 +83,19 @@ export class FinancerPage implements OnInit {
   }
 
   acceptFinancer(plan){
-    this.desabilitado = !this.desabilitado;
+    this.financer = true; 
+    this.paquete = false;
+    this.desabilitado = true;
     this.plan = plan;
- /*    console.log('el plan:', plan); */
     this.price =  plan.precio[0].total ;
     this.nomark = true;
-    this.paquete = false;
   }
 
   acceptFinancerPaquete(){
     console.log('se cambia a botom pagar ahora y ya no va a resumenPage');
-    this.desabilitado  = !this.desabilitado;
     this.paquete = true ;
     this.desabilitado = true;
+    this.financer = false;
   }
 
 

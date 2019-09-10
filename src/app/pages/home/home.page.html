@@ -8,11 +8,11 @@
         <ion-button icon-only (click)="openFilters()">
             <ion-icon name="wine"></ion-icon>
         </ion-button>
-      <ion-button color="secondary"
+      <!-- <ion-button color="secondary"
                   [routerLink]="'/chat'"
                   color="light">
         <ion-icon slot="end" name="chatbubbles"></ion-icon>
-      </ion-button>  
+      </ion-button>   -->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -53,18 +53,14 @@
                 <ion-card class="contenedorFechas" >
                   <div class="margenTexto">
                     <ion-row>
-                      <!-- <ion-col col-12>
-                        <p class="deberia"> tu bebé deberia llegar el:</p>
-                        <p class="fechaLlegada"> 16 - 03 - 2019</p>
-                      </ion-col> -->
                       <ion-col size="12">
                         <p class="textoFalta">solo faltan:</p>
                         <ion-row>
-                          <ion-col>
+                          <ion-col size="6">
                             <p class="semanasFaltantes">{{fechaPosible}}</p>
                             <p class="textoSemanasFaltantes">semanas</p>
                           </ion-col>
-                          <ion-col>
+                          <ion-col size="6">
                             <p class="diasFaltantes">{{diasFaltantes}}</p>
                             <p class="textoDiasFaltantes">dias</p>
                           </ion-col>

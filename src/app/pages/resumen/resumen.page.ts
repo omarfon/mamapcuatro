@@ -39,12 +39,12 @@ export class ResumenPage implements OnInit {
   public doctor; //doctor seleccionado//
   public available; //fecha seleccionada//
   public hora; // fecha seleccionada
-  /* private culqiData; */
+  private culqiData;
   private prestacion;
   /* private SERVERImage = Constants.IMAGESDOCTORS; */
   private plan;
-  public desactivadoBoton = true;
-  public desactivadoBotonLocal = true;
+  public desactivadoBoton = false;
+  public desactivadoBotonLocal = false;
   public culqiReturn;
   public dataArmada;
 
@@ -59,10 +59,11 @@ export class ResumenPage implements OnInit {
   ngOnInit() {
     window['culqi']= this.culqi.bind(this);
      
-      this.desactivadoBoton = true;
-      this.desactivadoBotonLocal = true;
+    /*   this.desactivadoBoton = true;
+      this.desactivadoBotonLocal = true; */
       this.pago = 'enLocal';
-    /* this.culqiData = JSON.parse(localStorage.getItem('culqiData')); */
+      window['culqi']= this.culqi.bind(this);
+       this.culqiData = JSON.parse(localStorage.getItem('culqiData'));
     /* window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
       window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z';
 
@@ -171,11 +172,11 @@ export class ResumenPage implements OnInit {
     }
   } */
 
-  async openCulqi() {
-    const loadingPago = await this.loadCtrl.create({
+   openCulqi() {
+    /* const loadingPago = await this.loadCtrl.create({
       message: "Haciendo el cobro...",
     });
-    await loadingPago.present();
+    await loadingPago.present(); */
     let appointment = this.currentAppointment;
     
     if(this.currentAppointment){
@@ -186,6 +187,7 @@ export class ResumenPage implements OnInit {
         currency: "PEN",
         amount: this.price * 100
       };
+      console.log('settings:', settings);
 
       window['Culqi'].options({
         style:{
@@ -246,7 +248,7 @@ export class ResumenPage implements OnInit {
         await alert.present();
       }
     }, 1000);
-    loadingPago.dismiss(); 
+    /* loadingPago.dismiss();  */
     } 
   }
 
@@ -255,10 +257,11 @@ export class ResumenPage implements OnInit {
     this.desactivadoBoton = false;
       console.log('this.price:', this.price);
       if(this.currentAppointment){
+        console.log('this.currentAppoinment:', this.currentAppointment);
         this.payCulqiCharges = true;
-        this.openCulqi();
         return 
       }
+      this.openCulqi();
     
       let provisionId = this.hora.params.provisionId;
       this.appointmentProvider.createAppointment(this.subida, provisionId)

@@ -25,7 +25,7 @@ const routes: Routes = [
               [
                 {
                   path: '',
-                  loadChildren: '../pages/evolucion/evolucion.module#EvolucionPageModule'
+                  loadChildren: '../pages/controles/controles.module#ControlesPageModule'
                 }
               ]
           },
@@ -35,7 +35,7 @@ const routes: Routes = [
               [
                 {
                   path: '',
-                  loadChildren: '../pages/controles/controles.module#ControlesPageModule'
+                  loadChildren: '../pages/chat/chat.module#ChatPageModule'
                 }
               ]
           },
