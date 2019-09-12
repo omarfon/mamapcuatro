@@ -39,7 +39,7 @@ export class DetailpagePage implements OnInit {
           text: 'SI',
           handler: data => {
             this.appointmentProvider.destroyAppointment(this.date).subscribe( async data => {
-              this.router.navigate(['citas-pendientes']);
+              this.router.navigate(['tabs']);
               const alert = await this.alertCtrl.create({
                   header:'cita eliminada',
                   message:"se ha eliminado satisfactoriamente la cita",

@@ -10,20 +10,21 @@ import { Router } from '@angular/router';
 export class CitasPendientesPage implements OnInit {
 
   public dates;
+  public _dates;
 
   constructor(public appointmetSrv: AppointmentService,
               public routes: Router) { 
-
                 this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
-      return this.dates = data;
-    })
-              }
+                  return this.dates = data;
+                })
+            
+  }
 
   ngOnInit() {
-    
-    this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+  /*   this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
-    })
+    }) */
+
   }
 
   goToDetailDate(date){

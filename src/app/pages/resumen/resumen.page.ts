@@ -5,6 +5,7 @@ import { TabsPage } from '../../tabs/tabs.page';
 import { AppointmentService } from '../../service/appointment.service';
 import { CulqiService } from '../../service/culqi.service';
 declare var Culqi: any;
+import * as Constants from  '../../../app/constants';
 
 
 
@@ -24,6 +25,7 @@ export class ResumenPage implements OnInit {
   public title;
   public amount;
   public description;
+  public SERVERImage = Constants.IMAGESDOCTORS;
   public  payCulqiCharges: boolean = true;
   public retrying:boolean = false;
   public alertError : any;
@@ -57,13 +59,12 @@ export class ResumenPage implements OnInit {
               public culqiPrv: CulqiService) {}
 
   ngOnInit() {
-    window['culqi']= this.culqi.bind(this);
-     
-    /*   this.desactivadoBoton = true;
-      this.desactivadoBotonLocal = true; */
+    
       this.pago = 'enLocal';
       window['culqi']= this.culqi.bind(this);
+      /* console.log('culqi en resumen:', window['culqi']); */
        this.culqiData = JSON.parse(localStorage.getItem('culqiData'));
+       
     /* window['Culqi'].publicKey = 'pk_live_CyArY9ygzb0d7oZb'; */
       window['Culqi'].publicKey = 'pk_test_e85SD7RVrWlW0u7z';
 
@@ -74,7 +75,7 @@ export class ResumenPage implements OnInit {
       this.doctor = this.dataArmada.doctor;
       this.price = this.dataArmada.plan.precio[0].total;
       this.subida = this.dataArmada.hora.listjson;
-      this.plan = this.dataArmada.plan.plan_desc;
+      this.plan = this.dataArmada.plan;
       this.available = this.dataArmada.available;
   }
   
@@ -259,9 +260,9 @@ export class ResumenPage implements OnInit {
       if(this.currentAppointment){
         console.log('this.currentAppoinment:', this.currentAppointment);
         this.payCulqiCharges = true;
+        this.openCulqi();
         return 
       }
-      this.openCulqi();
     
       let provisionId = this.hora.params.provisionId;
       this.appointmentProvider.createAppointment(this.subida, provisionId)

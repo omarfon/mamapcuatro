@@ -31,5 +31,11 @@ color:#000;
     background:transparent!important;
 }
 ion-item{
-    background: transparent!important;
+    --background: transparent!important;
+    color:#fff;
+    ion-icon{
+        color:#fff!important;
+        margin-left:20px;
+        font-size:1.6em;
+    }
 }

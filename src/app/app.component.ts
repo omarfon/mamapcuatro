@@ -24,6 +24,11 @@ export class AppComponent {
     this.sideMenu();
     this.initializeApp();
   }
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -63,6 +68,7 @@ export class AppComponent {
       }, */
     ]
   }
+
   closeSession(){
     this.menu.close('start');
     localStorage.clear();
