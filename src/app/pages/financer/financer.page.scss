@@ -1,5 +1,5 @@
 ion-content{
-  --background: rgb(231, 231, 231)!important;
+  --background: #eeeeee!important;
 }
 .visa {
   background-repeat: no-repeat;
@@ -289,11 +289,11 @@ ion-slides{
   
  }
  .containerPay{
-     background: #E6EAEA;
+     background: #eeeeee;
  }
 .tituloPlanes{
     text-align: center;
-    background:#062F51;
+    background:#00B6A3;
     color:#fff;
     font-size:1em!important;
     padding-top:.3em;
@@ -309,4 +309,8 @@ ion-slides{
 }
 .list-md{
   background: transparent!important;
+}
+ion-card{
+  margin-left:0;
+  margin-right: 0;
 }

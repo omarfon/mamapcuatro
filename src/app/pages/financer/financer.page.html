@@ -10,35 +10,7 @@
 <ion-content>
   <div class="containerPay">
     <h3 class="centerTitle">Como quieres pagar?</h3>
-         <!--  <div class="contenedorPagadores" *ngIf= "planes">
-            <ion-list>
-              <div *ngFor="let plan of planes">
-                <ion-item *ngIf="plan.precio.length > 0 ; else noprice">
-                    <ion-checkbox checked="isChecked" (click)="acceptFinancer(plan)"
-                    ></ion-checkbox>
-                    <ion-label>{{plan.plan_desc}}</ion-label>
-                    <span item-right>
-                      <p>S/. {{plan.precio[0].total}}</p>
-                    </span>
-                </ion-item>
-                <ng-template #noprice>
-                  <p class="noprice">Este precio aun no ha sido asignado en el sistema, reintente en algunos minutos</p>
-                </ng-template>
-                
-                  <ion-list *ngIf="plan.beneficios">
-                    <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
-                    <ion-item *ngFor="let beneficio of plan.beneficios" >
-                        <ion-checkbox checked="isChecked" (click)="acceptFinancer(plan)"></ion-checkbox>
-                          <ion-label>{{beneficio.beneficio_paquete}}</ion-label>
-                          <span item-right>
-                            <p>{{beneficio.cantidad_veces}} / {{beneficio.cantidad_max}}</p>
-                          </span>
-                      </ion-item>
-                      <hr>
-                    </ion-list>
-              </div>
-            </ion-list>  
-          </div> -->
+      
           <div class="contenedorPagadores" *ngIf= "planes">
             <ion-list no-lines>
               <ion-radio-group>

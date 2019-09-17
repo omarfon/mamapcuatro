@@ -41,7 +41,7 @@ export class DetailcontrolPage implements OnInit {
   
 
     console.log(this.encuentro);
-    if(!this.encuentro.notas[0].valor_campo){
+    if(!this.encuentro.notas[0]){
         this.notas = "no hay notas del doctor en este momento"
     }else{
       this.notas = this.encuentro.notas[0].valor_campo;

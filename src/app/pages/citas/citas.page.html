@@ -81,7 +81,7 @@
                                       <div class="horariosDisponibles">
                                             <ion-row>
                                                 <div *ngFor="let hora of horas" class="contenedorHoras">
-                                                    <ion-col size="3" *ngIf="hora.hour" (click)="goToFinancer(doctor,hora)">
+                                                    <ion-col size="3" *ngIf="hora.hour" (click)="goToFinancer(doctor,hora)" class="hora">
                                                       <div class="horas">
                                                         <p>{{hora.hour | slice:0:5}}</p>
                                                       </div>
