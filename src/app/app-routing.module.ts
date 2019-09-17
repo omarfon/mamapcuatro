@@ -27,6 +27,8 @@ const routes: Routes = [
   { path: 'graficas', loadChildren: './pages/graficas/graficas.module#GraficasPageModule' },
   { path: 'resumen', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
   { path: 'resumen/:datosObj', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
+  { path: 'detailrecipe/:datosObj', loadChildren: './pages/detailrecipe/detailrecipe.module#DetailrecipePageModule' },
+  { path: 'datos-personales', loadChildren: './pages/datos-personales/datos-personales.module#DatosPersonalesPageModule' },
 ];
 
 @NgModule({

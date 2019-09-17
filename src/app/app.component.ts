@@ -75,4 +75,8 @@ export class AppComponent {
     this.routes.navigate(['login']);
     console.log('cerrar sesión');
   }
+
+  goToDetailDatos(){
+    this.routes.navigate(['datos-personales']);
+  }
 }
