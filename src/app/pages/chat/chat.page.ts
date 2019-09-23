@@ -51,7 +51,7 @@ export class ChatPage implements OnInit {
       content: this.msg,
       type:'text',
       date: new Date(),
-      user: 'Juana',
+      user: localStorage.getItem('name'),
     }
     const id = localStorage.getItem('uid');
     this.chatSrv.sendMessageToFirebase(mensaje, id );

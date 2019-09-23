@@ -31,6 +31,7 @@ export class ChatService {
      }
    
    sendMessageToFirebase(message: Message, chat: string){
+     console.log(message, chat);
      this.db.collection('chatsRooms').doc(chat).update({
        messages: firestore.FieldValue.arrayUnion(message),
      })
@@ -46,34 +47,32 @@ export class ChatService {
         return new Promise((resolve, reject)=>{
           this.ad.auth.signInWithCustomToken(token).then(res =>{
              console.log(resolve);
-             let data = res;
-             localStorage.setItem('uid', data.user.uid);
              if(localStorage.getItem('uid')){
                this.uid = localStorage.getItem('uid');
                this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
                if( this.uidEnBase = this.uid){
-                 const uid = localStorage.getItem('uid');
-                 return this.db.collection('chatsRooms').doc(uid).valueChanges()
+                 this.id = localStorage.getItem('id');
+                 this.email = localStorage.getItem('email');
+                 this.db.collection('chatsRooms').doc(this.uid).set({
+                   id:this.uid,
+                   name: localStorage.getItem('patientName'),
+                   uid: this.uid,
+                   role: "user",
+                   datos:
+                   {
+                     patientid:this.id,
+                     email:this.email,
+                    }
+                    
+                  }).then(result =>{
+                    console.log('resultado de la escritura:', result);
+                  }).catch(err =>{
+                    console.log(err, 'error de no escritura');
+                  })
                 }
               }else{
-                      this.id = localStorage.getItem('id');
-                      this.email = localStorage.getItem('email');
-                     this.db.collection('chatsRooms').doc(this.uid).set({
-                       id:this.uid,
-                       name: localStorage.getItem('patientName'),
-                       uid: this.uid,
-                       role: "user",
-                       datos:
-                         {
-                           patientid:this.id,
-                           email:this.email,
-                         }
-                       
-                     }).then(result =>{
-                       console.log('resultado de la escritura:', result);
-                     }).catch(err =>{
-                       console.log(err, 'error de no escritura');
-                     })
+                const uid = localStorage.getItem('uid');
+                return this.db.collection('chatsRooms').doc(uid).valueChanges()
              }
           }).catch(err => reject(err))
         });

@@ -23,7 +23,12 @@ import { environment } from '../environments/environment';
 
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { ComponentsModule } from './components/components.module';
+
+
 registerLocaleData(localeEs);
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBMopx6KZ79wFANi2Yb6ysxvAIdRso96VY",
@@ -49,6 +54,7 @@ const firebaseConfig = {
             AngularFireModule.initializeApp(firebaseConfig),
             AngularFireAuthModule,
             AngularFirestoreModule,
+            ComponentsModule,
             ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
             ],
   providers: [

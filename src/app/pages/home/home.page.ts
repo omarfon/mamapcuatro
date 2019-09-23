@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { NotasService } from '../../service/notas.service';
 import * as moment from 'moment';
 import { DatosControlService } from '../../service/datos-control.service';
+import { PopoverController } from '@ionic/angular';
+import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fecha-pregnancy.component';
+
 
 
 @Component({
@@ -40,13 +43,14 @@ export class HomePage implements OnInit {
 
   constructor( public router : Router,
               public notasServ: NotasService,
-              public datosPvr: DatosControlService) { }
+              public datosPvr: DatosControlService,
+              public popover: PopoverController) { }
 
-  ngOnInit() {
+    async ngOnInit() {
 
     let cargaPublic = localStorage.getItem('role');
     if (cargaPublic == "user") {
-      this.datosPvr.getStartPregnacy().subscribe(data => {
+      this.datosPvr.getStartPregnacy().subscribe( data => {
         this.params = data;
         console.log('parametros:', this.params);
         // localStorage.setItem('fechaApertura', this.params.fecha_apertura);
@@ -94,8 +98,12 @@ export class HomePage implements OnInit {
           this.notasFiltro = this.notas;
         }
       });
-    } else {
-      console.log("no intenta obtener info de la semana ");
+    }else {
+        const popover = await this.popover.create({
+          component:FechaPregnancyComponent,
+          backdropDismiss: false
+        })
+        await popover.present();
     }
   }
 
