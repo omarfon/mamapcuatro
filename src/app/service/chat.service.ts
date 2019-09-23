@@ -46,7 +46,8 @@ export class ChatService {
        let token = localStorage.getItem('token')
         return new Promise((resolve, reject)=>{
           this.ad.auth.signInWithCustomToken(token).then(res =>{
-             console.log(resolve);
+             console.log(res);
+             localStorage.setItem('uid', res.user.uid )
              if(localStorage.getItem('uid')){
                this.uid = localStorage.getItem('uid');
                this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
@@ -65,7 +66,7 @@ export class ChatService {
                     }
                     
                   }).then(result =>{
-                    console.log('resultado de la escritura:', result);
+                    console.log('resultado de la escritura:', res);
                   }).catch(err =>{
                     console.log(err, 'error de no escritura');
                   })

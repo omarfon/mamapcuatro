@@ -18,7 +18,7 @@
             </div> 
           </ion-col>  
 
-          <ion-col offset="4" size="8"   *ngIf="mensaje.user == 'Juana' " class="message my-message">
+          <ion-col offset="4" size="8"   *ngIf="mensaje.user !== currentUser " class="message my-message">
             <b>{{mensaje.user}}</b> <br>
             <span>{{mensaje.content}}</span>
             <div class="time" text-right>

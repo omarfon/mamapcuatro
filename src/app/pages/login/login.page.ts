@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
        localStorage.setItem('photoUrl', this.data.photoUrl);
        localStorage.setItem('patientName', this.data.patientName);
        localStorage.setItem('token', this.data.firebaseToken);
-       localStorage.setItem('uid', this.data.userId);
+       /* localStorage.setItem('uid', this.data.userId); */
        localStorage.setItem('name', this.data.name);
 
        this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
