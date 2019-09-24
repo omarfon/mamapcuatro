@@ -70,9 +70,9 @@ export class AppComponent {
   }
 
   closeSession(){
+      localStorage.clear();
+    this.routes.navigate(['/login']);
     this.menu.close('start');
-    localStorage.clear();
-    this.routes.navigate(['login']);
     console.log('cerrar sesión');
   }
 

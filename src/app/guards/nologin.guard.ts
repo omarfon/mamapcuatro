@@ -2,24 +2,21 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
-export class AuthoGuard  implements CanActivate {
+export class NologinGuard implements CanActivate {
 
   constructor(public router: Router){}
     canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot):  Observable<boolean> | Promise<boolean> | boolean{
         if(localStorage.getItem('role') == "public" ){
-          this.router.navigate(['login']);
-          return false;
+          return true;
         }else{
-          return true
+          this.router.navigate(['tabs']);
+          return false
         }
       }
-    
+  
 }

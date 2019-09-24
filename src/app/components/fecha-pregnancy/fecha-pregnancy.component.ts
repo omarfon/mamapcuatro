@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-fecha-pregnancy',
@@ -7,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FechaPregnancyComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(public router: Router, public popoverCtrl: PopoverController) { }
 
   ngOnInit() {}
+
+  saveDate(fechaManual){
+    
+    localStorage.setItem('startPregnancy', fechaManual.value);
+    this.popoverCtrl.dismiss()
+    this.router.navigate(['tabs']);
+    
+    console.log( fechaManual, fechaManual.value);
+  }
 
 }

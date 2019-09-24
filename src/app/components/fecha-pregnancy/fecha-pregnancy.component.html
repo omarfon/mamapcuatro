@@ -1,9 +1,18 @@
-<div class="contenedorFecha">
-  <p>
-    Para continuar como invitado debes ingresar una fecha probable de concepción
-  </p>
 
-</div>
+<ion-content>
+  <p> Para continuar como invitado debes ingresar una fecha probable de concepción</p>
+
+  <ion-item>
+    <ion-label>Ingresa una fecha</ion-label>
+    <ion-datetime displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY"  #fechaManual></ion-datetime>
+  </ion-item>
+
+  <ion-button  size="block" color="primary" (click)="saveDate(fechaManual)">
+    ingresa la fecha
+  </ion-button>
+
+
+</ion-content>
   
 
  

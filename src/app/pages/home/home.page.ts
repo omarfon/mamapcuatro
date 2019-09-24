@@ -53,13 +53,14 @@ export class HomePage implements OnInit {
       this.datosPvr.getStartPregnacy().subscribe( data => {
         this.params = data;
         console.log('parametros:', this.params);
-        // localStorage.setItem('fechaApertura', this.params.fecha_apertura);
-        // let fechaApertura = localStorage.getItem('fechaApertura');
+
         this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
         this.today = moment();
+
         // aqui calcula la cantidad de semanas transcurridas
         const totalDays = this.today.diff(this.fecha, 'days');
         this.total = this.today.diff(this.fecha, 'weeks');
+
         /* aqui calculo el dia pendiente */
         this.diasPendientes =  totalDays - (this.total * 7 )  ;
         this.totaldias = this.total.toString();
@@ -104,6 +105,8 @@ export class HomePage implements OnInit {
           backdropDismiss: false
         })
         await popover.present();
+        this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
+        this.today = moment();
     }
   }
 

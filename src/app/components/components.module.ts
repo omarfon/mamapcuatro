@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FechaPregnancyComponent } from './fecha-pregnancy/fecha-pregnancy.component';
 
@@ -10,6 +10,9 @@ import { FechaPregnancyComponent } from './fecha-pregnancy/fecha-pregnancy.compo
   ],
   exports:[
     FechaPregnancyComponent
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class ComponentsModule { }
