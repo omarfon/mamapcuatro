@@ -11,7 +11,7 @@ export class NologinGuard implements CanActivate {
     canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot):  Observable<boolean> | Promise<boolean> | boolean{
-        if(localStorage.getItem('role') == "public" ){
+        if(!localStorage.getItem('role') ){
           return true;
         }else{
           this.router.navigate(['tabs']);

@@ -17,14 +17,12 @@ export class CitasPendientesPage implements OnInit {
                 /* this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
                   return this.dates = data;
                 }) */
-            
   }
 
   ngOnInit() {
     this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
     })
-
   }
 
   goToDetailDate(date){

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'start', pathMatch: 'full' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   /* { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)}, */
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [NologinGuard]},
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'detailrecipe/:datosObj', loadChildren: './pages/detailrecipe/detailrecipe.module#DetailrecipePageModule' },
   { path: 'datos-personales', loadChildren: './pages/datos-personales/datos-personales.module#DatosPersonalesPageModule' },
   { path: 'start', loadChildren: './pages/start/start.module#StartPageModule' },
+  { path: 'code', loadChildren: './pages/code/code.module#CodePageModule' },
 ];
 
 @NgModule({

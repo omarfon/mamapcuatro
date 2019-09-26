@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { DatosControlService } from '../../service/datos-control.service';
 import { PopoverController } from '@ionic/angular';
 import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fecha-pregnancy.component';
+import { isNullOrUndefined } from 'util';
 
 
 
@@ -49,67 +50,76 @@ export class HomePage implements OnInit {
     async ngOnInit() {
 
     let cargaPublic = localStorage.getItem('role');
-    if (cargaPublic == "user") {
+    /* const start = localStorage.getItem('startPregnancy') */
+    if (cargaPublic == 'user') {
       this.datosPvr.getStartPregnacy().subscribe( data => {
         this.params = data;
-        console.log('parametros:', this.params);
-
-        this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
-        this.today = moment();
-
-        // aqui calcula la cantidad de semanas transcurridas
-        const totalDays = this.today.diff(this.fecha, 'days');
-        this.total = this.today.diff(this.fecha, 'weeks');
-
-        /* aqui calculo el dia pendiente */
-        this.diasPendientes =  totalDays - (this.total * 7 )  ;
-        this.totaldias = this.total.toString();
-
-        /* cuanto tiempo ha pasado desde la concepcion */
-        const start = moment(this.fecha);
-        const cuanto = start.fromNow(true);
-        console.log('cuanto', cuanto);
-
-        /*   aqui les sumamos las 40 semanas a la fecha inicial para poder tener el ultimo dia de parto */
-        const posible = start.add(40, 'w');
-        this.posible = posible;
-        const posibleDays = posible.diff(this.today, 'd');
-        console.log('posibleDays:', posibleDays);
-        this.fechaPosible = posible.diff(this.today, 'w');
-        const diasFaltantes =  posibleDays - (this.fechaPosible * 7) ;
-        this.diasFaltantes = diasFaltantes;
-        console.log('diasFaltantes:', diasFaltantes);
-       
-       this.cantidad = this.total; 
-
-
-        this.mostrar = true;
-        if (!this.notasFiltro) {
-          this.notasServ.getNotes().subscribe(data => {
-            this.notas = data;
-            console.log('todas las notas:', this.notas);
-          });
-        } else {
-          let elfilter = this.notasFiltro;
-          this.notasServ.getNotesFilter(elfilter).subscribe(data => {
-            console.log('lo que me llega del filtro:', data);
-            this.notas = data
-            // console.log(this.notas);
-          });
-          this.notasFiltro = this.notas;
-        }
-      });
+      })
+        this.calculoFecha();
     }else {
+      if(!localStorage.getItem('startPregnancy')){
         const popover = await this.popover.create({
           component:FechaPregnancyComponent,
           backdropDismiss: false
-        })
+        });
         await popover.present();
-        this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
-        this.today = moment();
-    }
+        this.calculoFecha();
+      }else{
+        this.calculoFecha();
+      }
+    }    
   }
 
+  calculoFecha(){
+    
+      console.log('parametros:', this.params);
+
+      this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
+      this.today = moment();
+
+      // aqui calcula la cantidad de semanas transcurridas
+      const totalDays = this.today.diff(this.fecha, 'days');
+      this.total = this.today.diff(this.fecha, 'weeks');
+
+      /* aqui calculo el dia pendiente */
+      this.diasPendientes =  totalDays - (this.total * 7 )  ;
+      this.totaldias = this.total.toString();
+
+      /* cuanto tiempo ha pasado desde la concepcion */
+      const start = moment(this.fecha);
+      const cuanto = start.fromNow(true);
+      console.log('cuanto', cuanto);
+
+      /*   aqui les sumamos las 40 semanas a la fecha inicial para poder tener el ultimo dia de parto */
+      const posible = start.add(40, 'w');
+      this.posible = posible;
+      const posibleDays = posible.diff(this.today, 'd');
+      console.log('posibleDays:', posibleDays);
+      this.fechaPosible = posible.diff(this.today, 'w');
+      const diasFaltantes =  posibleDays - (this.fechaPosible * 7) ;
+      this.diasFaltantes = diasFaltantes;
+      console.log('diasFaltantes:', diasFaltantes);
+     
+     this.cantidad = this.total; 
+
+
+      this.mostrar = true;
+      if (!this.notasFiltro) {
+        this.notasServ.getNotes().subscribe(data => {
+          this.notas = data;
+          console.log('todas las notas:', this.notas);
+        });
+      } else {
+        let elfilter = this.notasFiltro;
+        this.notasServ.getNotesFilter(elfilter).subscribe(data => {
+          console.log('lo que me llega del filtro:', data);
+          this.notas = data
+          // console.log(this.notas);
+        });
+        this.notasFiltro = this.notas;
+      };
+    
+  }
 
   goToChat(){
     this.router.navigateByUrl('/evolucion');
