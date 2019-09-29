@@ -48,6 +48,10 @@ export class CitasPage implements OnInit {
     this.getDoctors();
   }
 
+  ionViewWillEnter(){
+    this.getDoctors();
+  }
+
   getDoctors(){
           this.citasSrv.getServicios().subscribe ( servicios =>{
           this.servicios = servicios;

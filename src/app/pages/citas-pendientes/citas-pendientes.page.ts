@@ -20,6 +20,14 @@ export class CitasPendientesPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('citas-pendientes page');
+    this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+      return this.dates = data;
+    })
+  }
+
+  ionViewWillLeave(){
+   console.log('citas-pendientes page saliendo');
     this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
     })
