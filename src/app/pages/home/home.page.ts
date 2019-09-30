@@ -62,7 +62,6 @@ export class HomePage implements OnInit {
         });
         await popover.present(); */
         this.calculoFecha();
-     
     }    
   }
 
@@ -114,12 +113,12 @@ export class HomePage implements OnInit {
         });
         this.notasFiltro = this.notas;
       };
-    
   }
 
   goToChat(){
     this.router.navigateByUrl('/evolucion');
   }
+
   goToEvolution(){
     console.log('me llevara a evolución');
   }

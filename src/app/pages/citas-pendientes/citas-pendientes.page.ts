@@ -14,9 +14,9 @@ export class CitasPendientesPage implements OnInit {
 
   constructor(public appointmetSrv: AppointmentService,
               public routes: Router) { 
-                /* this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+                this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
                   return this.dates = data;
-                }) */
+                })
   }
 
   ngOnInit() {
@@ -26,12 +26,8 @@ export class CitasPendientesPage implements OnInit {
     })
   }
 
-  ionViewWillLeave(){
-   console.log('citas-pendientes page saliendo');
-    this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
-      return this.dates = data;
-    })
-  }
+ 
+  
 
   goToDetailDate(date){
     const datosObj = JSON.stringify(date);
