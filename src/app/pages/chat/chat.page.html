@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="rosado">
       <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button ></ion-menu-button>
       </ion-buttons>
     <ion-title>chat</ion-title>
   </ion-toolbar>
@@ -18,7 +18,7 @@
             </div> 
           </ion-col>  
 
-          <ion-col offset="4" size="8"   *ngIf="mensaje.user == 'Juana' " class="message my-message">
+          <ion-col offset="4" size="8"   *ngIf="mensaje.user !== currentUser " class="message my-message">
             <b>{{mensaje.user}}</b> <br>
             <span>{{mensaje.content}}</span>
             <div class="time" text-right>
@@ -36,7 +36,7 @@
 
 <ion-footer padding>
   <ion-item>
-    <ion-textarea [(ngModel)]="msg" autosize    class="message-input" value="ingresa tu mensaje">
+    <ion-textarea [(ngModel)]="msg" autosize class="message-input" value="ingresa tu mensaje">
     </ion-textarea>
     <ion-button expand="block" fill="clear" color="primary" class="msg-btn" (click)="sendMessage()">
       <ion-icon name="send" ></ion-icon>

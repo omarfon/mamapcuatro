@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -16,9 +16,29 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth'
-import { firebaseConfig } from '../environments/environment';
+/* import { firebaseConfig } from '../environments/environment'; */
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+import { ComponentsModule } from './components/components.module';
+
+
+registerLocaleData(localeEs);
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBMopx6KZ79wFANi2Yb6ysxvAIdRso96VY",
+    authDomain: "aviva-mamapp-dev.firebaseapp.com",
+    databaseURL: "https://aviva-mamapp-dev.firebaseio.com",
+    projectId: "aviva-mamapp-dev",
+    storageBucket: "",
+    messagingSenderId: "519988913097",
+    appId: "1:519988913097:web:dca29f129d59cc0b"
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,11 +53,14 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
             MaterialModule,
             AngularFireModule.initializeApp(firebaseConfig),
             AngularFireAuthModule,
-            AngularFirestoreModule
+            AngularFirestoreModule,
+            ComponentsModule,
+            ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
             ],
   providers: [
     StatusBar,
     SplashScreen,
+    {provide: LOCALE_ID, useValue: "es"},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

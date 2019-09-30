@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { DataFinancerService } from './resolver/data-financer.service';
+import { AuthoGuard } from './guards/autho.guard';
+import { NologinGuard } from './guards/nologin.guard';
+
 
 
 const routes: Routes = [
-  /* { path: '', redirectTo: 'login', pathMatch: 'full' }, */
+  { path: '', redirectTo: 'start', pathMatch: 'full' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   /* { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)}, */
-  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
+  { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'tabs', loadChildren: './tabs/tabs.module#TabsPageModule' },
@@ -23,9 +25,14 @@ const routes: Routes = [
   { path: 'detailcontrol/:encuentroObj', loadChildren: './pages/detailcontrol/detailcontrol.module#DetailcontrolPageModule' },
   { path: 'recoverycode/:dataObj', loadChildren: './pages/recoverycode/recoverycode.module#RecoverycodePageModule' },
   { path: 'recetas', loadChildren: './pages/recetas/recetas.module#RecetasPageModule' },
-  { path: 'detailpage', loadChildren: './pages/detailpage/detailpage.module#DetailpagePageModule' },
+  { path: 'detailpage/:datosObj', loadChildren: './pages/detailpage/detailpage.module#DetailpagePageModule' },
   { path: 'graficas', loadChildren: './pages/graficas/graficas.module#GraficasPageModule' },
   { path: 'resumen', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
+  { path: 'resumen/:datosObj', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
+  { path: 'detailrecipe/:datosObj', loadChildren: './pages/detailrecipe/detailrecipe.module#DetailrecipePageModule' },
+  { path: 'datos-personales', loadChildren: './pages/datos-personales/datos-personales.module#DatosPersonalesPageModule' },
+  { path: 'start', loadChildren: './pages/start/start.module#StartPageModule' },
+  { path: 'code', loadChildren: './pages/code/code.module#CodePageModule' },
 ];
 
 @NgModule({

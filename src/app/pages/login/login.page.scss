@@ -35,8 +35,8 @@ ion-content{
         position:relative;
         // margin-bottom:20px!important;
         background:#9F5AE5;
-        font-size:1.2em;
-        font-weight: 600;
+        font-size:1em;
+        font-weight: 400;
         color:#ffffff;
         margin-top:10px;
         // width:80%;
@@ -45,9 +45,9 @@ ion-content{
       }
     }
     .contraseñaolvidada{
-      color:#fff;
-      font-size:1.2em;
-      margin-top: -5px;
+      color:#7044ff;
+      font-size:1em;
+      margin-top: 10px;
       font-weight: 800;
    /*    text-transform: capitalize; */
     }
@@ -82,5 +82,13 @@ ion-content{
     }
     .list-md{
       background: transparent!important;
+    }
+    ion-item{
+      --background: rgba(255, 255, 255, 0.5);
+      margin-bottom:10px;
+      ion-label{
+        color:#fff;
+        font-size:1.2em;
+      } 
     }
 

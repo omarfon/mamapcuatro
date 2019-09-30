@@ -1,156 +1,126 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>resumen</ion-title>
+  <ion-toolbar color="rosado">
+        <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+          </ion-buttons>
+    <ion-title>Resumen y pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-    <ion-card>
-
-        <ion-list>
-          <ion-row>
-            <ion-col col-5 class="imagenDoctor">
-                <img src="http://dappapache02.eastus.cloudapp.azure.com:4200/img/professionals/{{doctor.id}}.png" >
-            </ion-col>
-            <ion-col col-7>
-                <h3 class="nombreDoctor">
-                    {{doctor.fullName}}
-                  </h3>
-                  <p  class="nombreDoctor">cmp: 234567</p>
-            </ion-col>
-          </ion-row>
-  
-            <ion-item>
-              <ion-label bold>Sede:</ion-label>
-              <ion-label class="blue"> {{doctor.info.centers[0].description}}</ion-label>
-            </ion-item>
-  
-            <ion-item>
-                <ion-label Especialidad>Especialidad:</ion-label>
-                <ion-label item-end
-                          class="blue"> {{doctor.service.description}}</ion-label>
-              </ion-item>
-  
-              <ion-item>
-                  <ion-label Especialidad>Fecha:</ion-label>
-                  <ion-label item-end
-                            class="blue"> {{available.date | date:'full':'':'es'}}</ion-label>
-                </ion-item>
-  
-                <ion-item>
-                    <ion-label Especialidad>Hora:</ion-label>
-                    <ion-label item-end
-                              class="blue"> {{hora.hour | slice:0:5}}</ion-label>
-                  </ion-item>
-  
-                  <ion-item>
-                      <ion-label Especialidad>Precio:</ion-label>
-                      <ion-label item-end
-                                class="blue"> {{plan.precio[0].total}} soles</ion-label>
-                    </ion-item>
-  
-                  <div padding *ngIf="conPlanEfectivo == true">
-                      <button ion-button (click)="gotosave()" block color="primary" class="heighButton">Reservar cita</button>
-                  </div>
-        </ion-list>
-       <!--  <hr>
-        <div class="contenedorHorario">
-          <p>recuerda que deberás llegar 20 minutos antes e ingresar puntual a tu consulta....</p>
-        </div> -->
-      </ion-card>
-      <!-- <div *ngIf="conPlanEfectivo == false">
-        <div padding >
-            
-            <h4 class="tituloPagos">Escoge la forma en la que vas a pagar y listo...</h4>
-            <ion-segment [(ngModel)]="pago">
-                <ion-segment-button value="enLocal">
-                    En local
-                </ion-segment-button>
-                <ion-segment-button value="enClinica">
-                    Con tarjeta
-                </ion-segment-button>
-            </ion-segment>
-        </div>
-        <div [ngSwitch]="pago">
-            <ion-list *ngSwitchCase="'enLocal'">
-                <div class="resumen" >
-                  <div padding>
-                    <button
-                            ion-button color="secondary"
-                            class="botonAccept"
-                            [class.button-disabled]="true"
-                            block
-                            (click)="gotosave()">Confirmar cita
-                    </button>
-                </div>
-              </div>
-          </ion-list>
-            <ion-list *ngSwitchCase="'enClinica'">
-                <div class="resumen" >
-    
-            <div padding>
-                <button ion-button color="secondary" class="botonAccept" [class.button-disabled]="true" block (click)="payCulqi()">Pago con tarjeta</button>
-            </div>
-          </div>
-           
-            </ion-list>
-        </div>
-      </div> -->
-      <ion-row>
-          <ion-col col-6>
-                            <button *ngIf="!depe"
-                                    ion-button color="primary"
-                                    class="botonAccept"
-                                    [class.button-disabled]="true"
-                                    block
-                                    (click)="gotosave()"
-                                    [disabled] = "!desactivadoBotonLocal">
-                                   <ion-row>
-                                       <ion-col col-12 class="botonEfectivo">
-                                           <img class="iconosImagenes" src="assets/imgs/cobro/efectivo.png" alt="">
-                                       </ion-col>
-                                       <ion-col col-12>
-                                           <p>Pago en Local</p> 
-                                       </ion-col>
-                                   </ion-row>
-                                  </button>
-                      
+    <div class="container-gris">
+            <h3 class="titleCardPago">Lo que has escogido hasta el momento</h3>
+          <div class="containerResumen">
+            <ion-card class="CardDatosServicio">
+                <div>
+                    <ion-row class="centrar">
+                        <ion-col size="4">
+                            <img id="profile-image" src="http://dappapache02.eastus.cloudapp.azure.com:4200/img/professionals/{{doctor.id}}.png" > 
                         </ion-col>
-                        
-          <ion-col col-6>
-                     <button  *ngIf="payCulqiCharges == true"
-                              ion-button color="secondary" 
-                            class="botonAccept" 
-                            [class.button-disabled]="true" 
-                            block (click)="payCulqi()" 
-                            [disabled] = "!desactivadoBoton">
-                      <ion-row>
-                              <ion-col col-12 class="botonTarjeta">
-                                  <img class="iconosImagenes" src="assets/imgs/cobro/tarjeta.png" alt="">
+                        <ion-col size="8">
+                            <h3 class="nombreDoctor" text-center>
+                                {{ doctor.fullname }}
+                            </h3>
+                            <div class="sedeContainer">
+                                <p class="sede" type="text" disabled="true">Mendiola</p>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                    <div  *ngIf="depe"
+                        class="centrar">
+                        <p class="izquierda">Cita reservada para:</p>
+                        <p class="blue grande" item-end type="text" disabled="true">
+                            {{ depe.name}}
+                        </p>
+                    </div>
+                    <div  class="centrar">
+                        <p class="izquierda">Especialidad:</p>
+                        <p item-end class="blue" disabled="true"> {{ doctor.service.description }}</p>
+                    </div>
+                    <div  class="centrar">
+                        <p class="izquierda">Fecha:</p>
+                        <p item-end class="blue altas" disabled="true">
+                            {{ available | date:'EEEE d De MMMM' : 'es' }}
+                        </p>
+                    </div>
+                    <div  class="centrar">
+                        <p class="izquierda">Hora:</p>
+                        <p class="blue" type="text" disabled="true">
+                            {{ hora.hour | slice:0:5}}
+                        </p>
+                    </div>
+                    <div  class="centrar">
+                        <p class="izquierda">Costo:</p>
+                        <p class="blue" item-end type="text" disabled="true">
+                            S/.{{ price }}
+                        </p>
+                    </div>
+                    
+            </ion-card> 
+          </div>
+          
+        <hr class="linea">
+        <div>
+                <h4 class="tituloPagos">Escoge la forma en la que vas a pagar y listo...</h4>
+            <ion-row>
+                <ion-col size="6">
+                                  <ion-button 
+                                          ion-button color="primary"
+                                          class="botonAccept"
+                                          block
+                                          (click)="next()"
+                                          >
+                                          <!--[disabled] = "!desactivadoBotonLocal" 
+                                              [class.button-disabled]="true" -->
+                                         <ion-row>
+                                             <ion-col size="12" class="botonEfectivo">
+                                                 <img class="iconosImagenes" src="assets/imgs/cobro/efectivo.png" alt="">
+                                             </ion-col>
+                                             <ion-col size="12">
+                                                 <p>Pago en Local</p> 
+                                             </ion-col>
+                                         </ion-row>
+                                        </ion-button>
                               </ion-col>
-                              <ion-col col-12>
-                                  <p>Pago con tarjeta</p> 
-                              </ion-col>
-                          </ion-row> 
-                      </button>
-                      <button *ngIf="retrying == true"
-                              ion-button color="secondary" 
-                            class="botonAccept" 
-                            [class.button-disabled]="true" 
-                            block 
-                            (click)="retry()" 
-                            [disabled] = "!desactivadoBoton">
-                      <ion-row>
-                              <ion-col col-12 class="botonTarjeta">
-                                  <img class="iconosImagenes" src="assets/imgs/cobro/tarjeta.png" alt="">
-                              </ion-col>
-                              <ion-col col-12>
-                                  <p>Reintentar Pago</p> 
-                              </ion-col>
-                          </ion-row> 
-                      </button>
-          </ion-col>
-      </ion-row>
+                              
+                <ion-col size="6">
+                           <ion-button *ngIf="payCulqiCharges == true"
+                                     color="secondary" 
+                                  class="botonAccept" 
+                                  block (click)="payCulqi()" 
+                                  >
+                                 <!-- [class.button-disabled]="true" 
+                                   [disabled] = "desactivadoBoton == true" -->
+                            <ion-row>
+                                    <ion-col size="12" class="botonTarjeta">
+                                        <img class="iconosImagenes" src="assets/imgs/cobro/tarjeta.png" alt="">
+                                    </ion-col>
+                                    <ion-col col-12>
+                                        <p>Pago con tarjeta</p> 
+                                    </ion-col>
+                                </ion-row> 
+                            </ion-button>
+                            <ion-button *ngIf="retrying == true"
+                                    ion-button color="secondary" 
+                                    class="botonAccept" 
+                                    block 
+                                    >
+                                    <!--  [class.button-disabled]="true" 
+                                        (click)="retry()" 
+                                  [disabled] = "!desactivadoBoton == true" -->
+                            <ion-row>
+                                    <ion-col size="12" class="botonTarjeta">
+                                        <img class="iconosImagenes" src="assets/imgs/cobro/tarjeta.png" alt="">
+                                    </ion-col>
+                                    <ion-col size="12">
+                                        <p>Reintentar Pago</p> 
+                                    </ion-col>
+                                </ion-row> 
+                            </ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
 
 </ion-content>

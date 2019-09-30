@@ -41,7 +41,7 @@ export class DetailcontrolPage implements OnInit {
   
 
     console.log(this.encuentro);
-    if(!this.encuentro.notas[0].valor_campo){
+    if(!this.encuentro.notas[0]){
         this.notas = "no hay notas del doctor en este momento"
     }else{
       this.notas = this.encuentro.notas[0].valor_campo;
@@ -55,8 +55,9 @@ export class DetailcontrolPage implements OnInit {
     let id = this.encuentro.encuentro;
 
     this.recipeSrv.getRecipes(id).subscribe((data:any)=>{
-      this.recipe = data;
-      if(this.recipes[0]){
+      this.recipes = data;
+      console.log(this.recipes);
+      if(!this.recipes[0]){
           console.log('no hay recetas para este control');
       }else{
           this.recetas = this.recipes[0].prescripciones;

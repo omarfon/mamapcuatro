@@ -1,0 +1,27 @@
+
+<ion-content>
+  <p> Para continuar como invitado debes ingresar una fecha probable de concepción</p>
+
+  <ion-list >
+   
+    <ion-item >
+      <ion-item>
+        <ion-label position="floating">Ingresa tu nombre</ion-label>
+        <ion-input type="text" #nombre></ion-input>
+      </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ingresa una fecha</ion-label>
+      <ion-datetime displayFormat="DD MM YYYY" pickerFormat="DD MM YYYY"  #fechaManual></ion-datetime>
+    </ion-item>
+  </ion-list>
+
+  <ion-button  size="block" color="primary" (click)="saveDate(nombre , fechaManual)">
+    ingresa la fecha
+  </ion-button>
+
+
+</ion-content>
+  
+
+ 

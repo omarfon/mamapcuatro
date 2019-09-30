@@ -10,20 +10,33 @@ import { Router } from '@angular/router';
 export class CitasPendientesPage implements OnInit {
 
   public dates;
+  public _dates;
 
   constructor(public appointmetSrv: AppointmentService,
-              public routes: Router) { }
+              public routes: Router) { 
+                /* this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+                  return this.dates = data;
+                }) */
+  }
 
   ngOnInit() {
+    console.log('citas-pendientes page');
+    this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
+      return this.dates = data;
+    })
+  }
+
+  ionViewWillLeave(){
+   console.log('citas-pendientes page saliendo');
     this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
     })
   }
 
   goToDetailDate(date){
-    this.routes.navigate(['detailpage',{
-        date:date
-    }])
+    const datosObj = JSON.stringify(date);
+    console.log('data armada', datosObj);
+    this.routes.navigate(['detailpage', datosObj]);
   }
 
 }

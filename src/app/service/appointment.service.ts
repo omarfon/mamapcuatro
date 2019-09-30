@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { environment, API_ENDPOINT } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER = API_ENDPOINT;
   private apiUrl = `${this.SERVER}ebooking/`;
 
   constructor( public http: HttpClient) { }
@@ -50,7 +51,7 @@ export class AppointmentService {
     let headers = new HttpHeaders({"Authorization": authorization});
     // appointment.email = localStorage.getItem('emailUser'); appointment.password = localStorage.getItem('passUser');
 
-    return this.http.delete(this.apiUrl + `appointments/${appointment.appointmentId}`, {headers}).pipe(
+    return this.http.delete(this.apiUrl + `appointments/${appointment}`, {headers}).pipe(
                     map( data => {
                       return data;
                     })

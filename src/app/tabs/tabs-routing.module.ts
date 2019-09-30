@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { AuthoGuard } from '../guards/autho.guard';
+
 
 
 const routes: Routes = [
@@ -15,7 +17,7 @@ const routes: Routes = [
               [
                 {
                   path: '',
-                  loadChildren: '../pages/home/home.module#HomePageModule'
+                  loadChildren: '../pages/home/home.module#HomePageModule' 
                 }
               ]
           },
@@ -25,7 +27,7 @@ const routes: Routes = [
               [
                 {
                   path: '',
-                  loadChildren: '../pages/evolucion/evolucion.module#EvolucionPageModule'
+                  loadChildren: '../pages/controles/controles.module#ControlesPageModule'
                 }
               ]
           },
@@ -35,7 +37,7 @@ const routes: Routes = [
               [
                 {
                   path: '',
-                  loadChildren: '../pages/controles/controles.module#ControlesPageModule'
+                  loadChildren: '../pages/chat/chat.module#ChatPageModule'
                 }
               ]
           },

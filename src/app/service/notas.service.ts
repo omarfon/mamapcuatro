@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment, API_NOTAS } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotasService {
-  private SERVER = 'http://dappapache02.eastus.cloudapp.azure.com:1337/api/v1/mama/';
+  private SERVER = API_NOTAS;
   private apiUrl = `${this.SERVER}`;
   private apiUrlFilter = `${this.SERVER}`;
   private apiUrlSemana = `${this.SERVER}notas-por-semana?semana=`;

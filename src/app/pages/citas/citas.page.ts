@@ -4,6 +4,7 @@ import { CitasService } from './../../service/citas.service';
 import { LoadingController, NavController } from '@ionic/angular';
 import * as moment from 'moment';
 import { FinancerdatesService } from '../../service/financerdates.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-citas',
@@ -42,61 +43,57 @@ export class CitasPage implements OnInit {
     this.c = this.route.snapshot.paramMap.get('c');
     console.log(this.c);
     this.id=38;
-
-
-          this.fromDate = moment().format('YYYY-MM-DD');
-          this.toDate = moment(this.fromDate).add(6, 'days').format('YYYY-MM-DD');
+    this.fromDate = moment().format('YYYY-MM-DD');
+    this.toDate = moment(this.fromDate).add(6, 'days').format('YYYY-MM-DD');
 
     this.getDoctors();
   }
 
-  getDoctors(){
-    /* let loading = this.loadingCtrl.create({
-                content: 'por favor espere'
-              });
-            loading.present(); */
+  ionViewWillEnter(){
+    this.getDoctors();
+  }
 
-          this.citasSrv.getServicios().subscribe ( servicios =>{
+  async getDoctors(){
+      const loading = await this.loadingCtrl.create({
+        message: 'Cargando doctores...'
+      });
+      await loading.present();
+          forkJoin(this.citasSrv.getServicios()).subscribe ( servicios =>{
           this.servicios = servicios;
-              });
-    this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
-      this.disponibles = false;
-      if(doctors.length == 0){
-        this.disponibles = true;
-        return null;
-      }
-      /* console.log(doctors); */
-      this.doctors = doctors;
-      for(let doctor of doctors){
-        this.citasSrv.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
-          if (availables && availables.length > 0) {
-            doctor.availables = availables;
-            doctor.hasAvailable = true;
-            doctor.expanded = false;
+        });
+        loading.dismiss();
+        
+        this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
+          this.disponibles = false;
+          if(doctors.length == 0){
+            this.disponibles = true;
+            return null;
           }
-        })
-      }
-      this.doctorsF = this.doctors;
-      console.log('this.doctors:', this.doctors);
-    });
-    /* loading.dismiss(); */
+          /* console.log(doctors); */
+          this.doctors = doctors;
+          for(let doctor of doctors){
+            this.citasSrv.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
+              if (availables && availables.length > 0) {
+                doctor.availables = availables;
+                doctor.hasAvailable = true;
+                doctor.expanded = false;
+              }
+            })
+          }
+          this.doctorsF = this.doctors;
+          console.log('this.doctors:', this.doctors);
+        });
   }
 
   expandedItem(doctor, available) {
     if(!this.hora){
-      /* let loading = this.loadingCtrl.create({
-        content: 'Cargando horas disponibles...',
-        spinner: 'bubbles',
-      });
-      loading.present(); */
-      console.log('doctor:', doctor, available);
+      console.log('doctor y available:', doctor, available);
       this.selectedDay = available;
       let id = doctor.id;
       let serviceId = doctor.service.id;
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, serviceId , fromDate, toDate).subscribe(hoy => {
-  
         console.log('hoy' , hoy);
         this.dias = hoy[0].hours;
         // console.log('this.dias:',this.dias);
@@ -109,9 +106,6 @@ export class CitasPage implements OnInit {
           return listDoctor
         });
         this.horas = this.dias;
-        /* this.turnoManana = this.horas.filter(x =>x.hour < '15:20:00');
-        this.turnoTarde = this.horas.filter(x => x.hour > '15:00:00'); */
-
         /* loading.dismiss(); */
         console.log('las horas:', this.horas);
         this.dia = available.date;
@@ -125,7 +119,6 @@ export class CitasPage implements OnInit {
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, serviceId , fromDate, toDate).subscribe(hoy => {
-  
         console.log('hoy' , hoy);
         this.dias = hoy[0].hours;
         // console.log('this.dias:',this.dias);
@@ -145,11 +138,7 @@ export class CitasPage implements OnInit {
     }
   }
 
-  /* goToResumen(doctor , hora){
-    console.log('available de cita:',hora);
-    this.navCtrl.push(ResumenPage, {available:this.selectedDay, doctor: doctor , hora:hora});
-    this.navCtrl.push (FinancerPage, {available:this.selectedDay , doctor: doctor, hora: hora});
-  } */
+
   
   goToFinancer(doctor, hora){
     console.log('hora y doctor', hora, doctor);
@@ -158,19 +147,22 @@ export class CitasPage implements OnInit {
       servicio_id: hora.params.serviceId,
       prestacion: hora.params.provisionId,
       medico_id: doctor.id,
-      proposedate: this.selectedDay.date
+      proposedate: this.selectedDay.date,
+      hora: hora,
+      doctor: {
+        id:doctor.id,
+        fullname:doctor.fullName,
+        info: doctor.info,
+        service: doctor.service,
+        cmp: doctor.cmp
+      } 
+
     }
     const datosObj = JSON.stringify(datos);
     console.log('data armada', datosObj);
       this.routes.navigate(['financer', datosObj]);
   
 
- /*  setFinancer(){
-    let available = this.available;
-    let hora: hora;
-    let doctor: DocumentOrShadowRoot;
-    this.finanSrv.guardardatos(available, doctor, hora){
-*/
     } 
 
   }

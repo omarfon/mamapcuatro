@@ -1,3 +1,4 @@
+import { PopoverController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthoService } from '../../service/autho.service';
 import { UserService } from 'src/app/service/user.service';
@@ -5,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController, Events } from '@ionic/angular';
 import { DatosControlService } from '../../service/datos-control.service';
 import { TabsPage } from '../../tabs/tabs.page';
+import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
 
 
 @Component({
@@ -31,7 +33,17 @@ export class LoginPage implements OnInit {
                public alertCtrl: AlertController,
                public router: Router,
                public events: Events,
-               public datosSrv: DatosControlService) { }
+               public datosSrv: DatosControlService,
+               public popover: PopoverController) {
+
+                const authorization = localStorage.getItem('authorization');
+                if(!authorization){
+                  this.autho.getKey().subscribe( (data:any) =>{
+                    localStorage.setItem('authorization', data.authorization );
+                    localStorage.setItem('role', data.role);
+                  })
+                }
+                }
 
   ngOnInit() {
     const authorization = localStorage.getItem('authorization');
@@ -56,6 +68,9 @@ export class LoginPage implements OnInit {
        localStorage.setItem('role', this.data.role);
        localStorage.setItem('photoUrl', this.data.photoUrl);
        localStorage.setItem('patientName', this.data.patientName);
+       localStorage.setItem('token', this.data.firebaseToken);
+       /* localStorage.setItem('uid', this.data.userId); */
+       localStorage.setItem('name', this.data.name);
 
        this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
         this._startPregnancy = data.fecha_ultima_regla;
@@ -126,8 +141,17 @@ export class LoginPage implements OnInit {
   }
 
   goToRegister(){
-    /* his.navCtrl.push(RegisterPage); */
+
     this.router.navigate(['register']);
+  }
+
+  async goTohome(){
+    const popover = await this.popover.create({
+      component:FechaPregnancyComponent,
+      backdropDismiss: false
+    })
+    await popover.present();
+    /* this.router.navigate(['tabs']); */
   }
 
 }
