@@ -10,8 +10,8 @@
           <ion-content>
             <div class="cabecera" (click)="goToDetailDatos()">
               <div class="circulo"></div>
-              <h3 class="nombre">Juana Perez</h3>
-              <p class="correo">juana.perez@aviva.pe</p> 
+              <h3 class="nombre">{{nombre}}</h3>
+              <!-- <p class="correo">juana.perez@aviva.pe</p>  -->
             </div>
             <ion-list >
               <ion-menu-toggle auto-hide="true" *ngFor="let pages of navigate">

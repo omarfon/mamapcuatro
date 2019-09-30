@@ -56,16 +56,13 @@ export class HomePage implements OnInit {
       })
         this.calculoFecha();
     }else {
-      if(!localStorage.getItem('startPregnancy')){
-        const popover = await this.popover.create({
+        /* const popover = await this.popover.create({
           component:FechaPregnancyComponent,
           backdropDismiss: false
         });
-        await popover.present();
+        await popover.present(); */
         this.calculoFecha();
-      }else{
-        this.calculoFecha();
-      }
+     
     }    
   }
 

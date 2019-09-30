@@ -1,5 +1,6 @@
 <ion-content>
     <p class="codigoValida">hemos enviado al correo el código de validación , ingresalo y listo....</p>
+  <p *ngIf="message" class="errorMessage">{{message}}</p>
     <ion-row>
       <div col-2></div>
       <div col-8>

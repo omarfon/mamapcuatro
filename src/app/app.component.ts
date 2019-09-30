@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   navigate : any;
+  public nombre;
 
   constructor(
     private platform: Platform,
@@ -27,7 +28,7 @@ export class AppComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    
+    this.nombre = localStorage.getItem('patientName')
   }
 
   initializeApp() {

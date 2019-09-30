@@ -128,7 +128,6 @@ export class RegisterPage implements OnInit {
     const email = data.email
     this.crudSrv.validateEmail(email).subscribe(async (res) =>{
       console.log(res);
-      if(res.result == "ok"){
         const popover = await this.popoverCtrl.create({
           component: ModalCodeComponent,
           componentProps: {
@@ -136,12 +135,19 @@ export class RegisterPage implements OnInit {
           }
         });
         await popover.present();
-       }else{
-        const alert = await this.alertCtrl.create({
-          header : "Error"
-         });
-         await alert.present();
-     }
+    },async err =>{
+      const alert = await this.alertCtrl.create({
+        header : "Error",
+        subHeader: "Posiblemente el correo ya ha sido registrado",
+        buttons:[
+          {
+            text: 'Reintentar',
+            role:'Cancel'
+          }
+        ]
+       });
+       console.log(err);
+       await alert.present();
    })
   }
  

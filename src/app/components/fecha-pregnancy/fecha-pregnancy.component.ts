@@ -14,8 +14,9 @@ export class FechaPregnancyComponent implements OnInit {
 
   ngOnInit() {}
 
-  saveDate(fechaManual){
+  saveDate(nombre, fechaManual){
     
+    localStorage.setItem('patientName', nombre.value);
     localStorage.setItem('startPregnancy', fechaManual.value);
     this.popoverCtrl.dismiss()
     this.router.navigate(['tabs']);

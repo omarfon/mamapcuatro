@@ -4,6 +4,7 @@ import { CitasService } from './../../service/citas.service';
 import { LoadingController, NavController } from '@ionic/angular';
 import * as moment from 'moment';
 import { FinancerdatesService } from '../../service/financerdates.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-citas',
@@ -52,30 +53,36 @@ export class CitasPage implements OnInit {
     this.getDoctors();
   }
 
-  getDoctors(){
-          this.citasSrv.getServicios().subscribe ( servicios =>{
+  async getDoctors(){
+      const loading = await this.loadingCtrl.create({
+        message: 'Cargando doctores...'
+      });
+      await loading.present();
+          forkJoin(this.citasSrv.getServicios()).subscribe ( servicios =>{
           this.servicios = servicios;
-              });
-    this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
-      this.disponibles = false;
-      if(doctors.length == 0){
-        this.disponibles = true;
-        return null;
-      }
-      /* console.log(doctors); */
-      this.doctors = doctors;
-      for(let doctor of doctors){
-        this.citasSrv.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
-          if (availables && availables.length > 0) {
-            doctor.availables = availables;
-            doctor.hasAvailable = true;
-            doctor.expanded = false;
+        });
+        loading.dismiss();
+        
+        this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
+          this.disponibles = false;
+          if(doctors.length == 0){
+            this.disponibles = true;
+            return null;
           }
-        })
-      }
-      this.doctorsF = this.doctors;
-      console.log('this.doctors:', this.doctors);
-    });
+          /* console.log(doctors); */
+          this.doctors = doctors;
+          for(let doctor of doctors){
+            this.citasSrv.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
+              if (availables && availables.length > 0) {
+                doctor.availables = availables;
+                doctor.hasAvailable = true;
+                doctor.expanded = false;
+              }
+            })
+          }
+          this.doctorsF = this.doctors;
+          console.log('this.doctors:', this.doctors);
+        });
   }
 
   expandedItem(doctor, available) {

@@ -1,3 +1,4 @@
+import { PopoverController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthoService } from '../../service/autho.service';
 import { UserService } from 'src/app/service/user.service';
@@ -5,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertController, Events } from '@ionic/angular';
 import { DatosControlService } from '../../service/datos-control.service';
 import { TabsPage } from '../../tabs/tabs.page';
+import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class LoginPage implements OnInit {
                public alertCtrl: AlertController,
                public router: Router,
                public events: Events,
-               public datosSrv: DatosControlService) {
+               public datosSrv: DatosControlService,
+               public popover: PopoverController) {
 
                 const authorization = localStorage.getItem('authorization');
                 if(!authorization){
@@ -142,8 +145,13 @@ export class LoginPage implements OnInit {
     this.router.navigate(['register']);
   }
 
-  goTohome(){
-    this.router.navigate(['tabs']);
+  async goTohome(){
+    const popover = await this.popover.create({
+      component:FechaPregnancyComponent,
+      backdropDismiss: false
+    })
+    await popover.present();
+    /* this.router.navigate(['tabs']); */
   }
 
 }

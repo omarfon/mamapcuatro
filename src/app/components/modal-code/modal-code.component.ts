@@ -32,6 +32,7 @@ export class ModalCodeComponent implements OnInit {
   public result;
   public primero;
   public segundo;
+  public message;
 
 
   constructor(public crudSrv: CrudService,
@@ -97,6 +98,8 @@ export class ModalCodeComponent implements OnInit {
         // console.log('pasó logeado', this.createOk);
         loading.dismiss()
         }
+    }, err=>{
+      this.message = "El código no es valido";
     });
   }
 

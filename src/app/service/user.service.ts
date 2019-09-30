@@ -22,7 +22,7 @@ export class UserService {
     let headers = new HttpHeaders({'Authorization': authorization});
 
     let params = {email: email, password: password, app:"mama"}
-      return this.http.post(this.SERVER , params, {headers}).pipe( 
+      return this.http.post(this.apiUrl , params, {headers}).pipe( 
               map(data =>{
               return data
         })
