@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators'
+import { environment, API_ENDPOINT } from '../../environments/environment';
 
 
 @Injectable({
@@ -9,10 +10,10 @@ import {map} from 'rxjs/operators'
 })
 export class UserService {
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/auth/login";
-  private SERVER2 = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/auth/login-firebase"
-  private apiUrl = `${this.SERVER}`;
-  private apiUrlDatos = `${this.SERVER}ebooking/`;
+  private SERVER = API_ENDPOINT;
+  /* private SERVER2 = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/auth/login-firebase" */
+  private apiUrl = `${this.SERVER}auth/login`;
+  private apiUrlDatos = `${this.SERVER}auth/login/ebooking/`;
 
   constructor( public http: HttpClient) { }
 

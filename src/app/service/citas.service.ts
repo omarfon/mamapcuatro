@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-/* import { Observable } from 'rxjs/Observable'; */
 import {map} from 'rxjs/operators';
-/* import 'rxjs/add/operator/catch'; */
+import { API_ENDPOINT } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class CitasService {
   servicios: any[] = [];
   doctores: any[] = [];
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER = API_ENDPOINT;
   private apiUrl = `${this.SERVER}`;
 
   constructor( public http: HttpClient) { }

@@ -10,6 +10,7 @@ import { MaterialModule } from '../../material.module';
 
 import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
 import { ComponentsModule } from '../../components/components.module';
+import { FiterComponent } from '../../components/fiter/fiter.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents:[
-    FechaPregnancyComponent
+    FechaPregnancyComponent,
+    FiterComponent
   ],
   imports: [
     CommonModule,

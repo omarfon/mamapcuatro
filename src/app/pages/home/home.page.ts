@@ -5,8 +5,7 @@ import * as moment from 'moment';
 import { DatosControlService } from '../../service/datos-control.service';
 import { PopoverController } from '@ionic/angular';
 import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fecha-pregnancy.component';
-import { isNullOrUndefined } from 'util';
-
+import { FiterComponent } from '../../components/fiter/fiter.component';
 
 
 @Component({
@@ -135,8 +134,14 @@ export class HomePage implements OnInit {
     });
   }
 
-  openFilters(){
+  async openFilters(ev:any){
     console.log('abrir filtros');
+    const popover = await this.popover.create({
+      component: FiterComponent,
+      event: ev,
+      animated: true
+    });
+    await popover.present();
   }
 
 }

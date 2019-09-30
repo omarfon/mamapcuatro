@@ -70,7 +70,17 @@ export class AppComponent {
   }
 
   closeSession(){
-      localStorage.clear();
+      /* localStorage.clear(); */
+      localStorage.removeItem('role');
+      localStorage.removeItem('authorization');
+      localStorage.removeItem('id');
+      localStorage.removeItem('photoUrl');
+      localStorage.removeItem('name');
+      localStorage.removeItem('startPregnancy');
+      localStorage.removeItem('email');
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('patientName');
+      localStorage.removeItem('token');
     this.routes.navigate(['/login']);
     this.menu.close('start');
     console.log('cerrar sesión');

@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { API_ENDPOINT } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER = API_ENDPOINT;
   private apiValidate = `${this.SERVER}users/validate-email/register`;
   private apiCreate = `${this.SERVER}users/register/`;
 

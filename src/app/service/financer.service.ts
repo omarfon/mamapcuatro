@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators';
-
+import { environment, API_ENDPOINT } from '../../environments/environment';
+environment
 @Injectable({
   providedIn: 'root'
 })
 export class FinancerService {
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER = API_ENDPOINT;
   private apiUrl = this.SERVER;
 
   constructor( public http: HttpClient) { }
