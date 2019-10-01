@@ -26,7 +26,7 @@ export class RecoverycodePage implements OnInit {
   ngOnInit() {
      const dataObj = this.router.snapshot.paramMap.get('dataObj');
      this.datos = JSON.parse(dataObj);
-    console.log('this.datos:', this.datos);
+    /* console.log('this.datos:', this.datos); */
 
     this.formCode = this.form.group({
       primero : [],
@@ -58,14 +58,14 @@ export class RecoverycodePage implements OnInit {
     // console.log(code);
     this.datos.code = code;
     this.datos.password = this.formCode.value.password;
-    console.log('datos.code:', this.datos);
+    /* console.log('datos.code:', this.datos); */
     // this.datos.id = this.code.id;
     // console.log('data armada:', this.datos);
 
     this.usrSrv.recoveryLogin(this.datos).subscribe(data => {
         this.logeo = data;
          if(this.logeo.ok == false){
-          console.log('el logeo:', this.logeo);
+          /* console.log('el logeo:', this.logeo); */
           /* const alert = this.alertCtrl.create({
             header:`Error en la recuperación`,
             message:`${this.logeo.error.message}`,
@@ -81,7 +81,7 @@ export class RecoverycodePage implements OnInit {
          localStorage.setItem('photoUrl', this.logeo.photoUrl);
          localStorage.setItem('patientName', this.logeo.patientName);
           this.events.publish('user:logged', 'logged');
-            console.log('this.logeo:', this.logeo);
+            /* console.log('this.logeo:', this.logeo); */
             /* let alert = this.alertCtrl.create({
               header:"Cuenta recuperada",
               message:"su cuenta se ha recuperado exitosamente",

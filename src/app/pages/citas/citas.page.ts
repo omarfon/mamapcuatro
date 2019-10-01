@@ -41,7 +41,7 @@ export class CitasPage implements OnInit {
 
   ngOnInit() {
     this.c = this.route.snapshot.paramMap.get('c');
-    console.log(this.c);
+    /* console.log(this.c); */
     this.id=38;
     this.fromDate = moment().format('YYYY-MM-DD');
     this.toDate = moment(this.fromDate).add(6, 'days').format('YYYY-MM-DD');
@@ -81,7 +81,7 @@ export class CitasPage implements OnInit {
             })
           }
           this.doctorsF = this.doctors;
-          console.log('this.doctors:', this.doctors);
+          /* console.log('this.doctors:', this.doctors); */
         });
   }
 
@@ -106,8 +106,7 @@ export class CitasPage implements OnInit {
           return listDoctor
         });
         this.horas = this.dias;
-        /* loading.dismiss(); */
-        console.log('las horas:', this.horas);
+        /* console.log('las horas:', this.horas); */
         this.dia = available.date;
         // console.log('dias', this.dias);
       })
@@ -119,7 +118,7 @@ export class CitasPage implements OnInit {
       let fromDate = this.selectedDay.date;
       let toDate = this.selectedDay.date;
       this.citasSrv.getAvailablesPerDoctor(id, serviceId , fromDate, toDate).subscribe(hoy => {
-        console.log('hoy' , hoy);
+        /* console.log('hoy' , hoy); */
         this.dias = hoy[0].hours;
         // console.log('this.dias:',this.dias);
         this.doctors.map((listDoctor) => {
@@ -141,7 +140,7 @@ export class CitasPage implements OnInit {
 
   
   goToFinancer(doctor, hora){
-    console.log('hora y doctor', hora, doctor);
+    /* console.log('hora y doctor', hora, doctor); */
     const datos = {
       centerId : hora.params.centerId,
       servicio_id: hora.params.serviceId,
@@ -159,7 +158,7 @@ export class CitasPage implements OnInit {
 
     }
     const datosObj = JSON.stringify(datos);
-    console.log('data armada', datosObj);
+    /* console.log('data armada', datosObj); */
       this.routes.navigate(['financer', datosObj]);
   
 

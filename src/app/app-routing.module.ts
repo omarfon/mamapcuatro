@@ -30,7 +30,6 @@ const routes: Routes = [
   { path: 'resumen', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
   { path: 'resumen/:datosObj', loadChildren: './pages/resumen/resumen.module#ResumenPageModule' },
   { path: 'detailrecipe/:datosObj', loadChildren: './pages/detailrecipe/detailrecipe.module#DetailrecipePageModule' },
-  { path: 'datos-personales', loadChildren: './pages/datos-personales/datos-personales.module#DatosPersonalesPageModule' },
   { path: 'start', loadChildren: './pages/start/start.module#StartPageModule' },
   { path: 'code', loadChildren: './pages/code/code.module#CodePageModule' },
 ];

@@ -37,7 +37,7 @@ export class DetailcontrolPage implements OnInit {
     this.control = 'parametros'; 
     let encuentroObj = this.route.snapshot.paramMap.get('encuentroObj');
     this.encuentro = JSON.parse(encuentroObj);
-    console.log('this.encuentro en detalle control:', this.encuentro);
+    /* console.log('this.encuentro en detalle control:', this.encuentro); */
   
 
     console.log(this.encuentro);
@@ -46,7 +46,7 @@ export class DetailcontrolPage implements OnInit {
     }else{
       this.notas = this.encuentro.notas[0].valor_campo;
       this.parametros = this.encuentro.parametros;
-      console.log(this.parametros);
+      /* console.log(this.parametros); */
     }
 
 

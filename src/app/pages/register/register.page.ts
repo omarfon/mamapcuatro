@@ -61,12 +61,12 @@ export class RegisterPage implements OnInit {
 
     this.dataSvr.getGenders().subscribe(datagenders => {
       this.genders = datagenders;
-      console.log("this.genders:", this.genders);
+      /* console.log("this.genders:", this.genders); */
     });
 
     this.dataSvr.getDocuments().subscribe(documents => {
       this.documents = documents;
-      console.log("this.documents:", this.documents);
+      /* console.log("this.documents:", this.documents); */
     });
 
     this.registerForm = this.fb.group({
@@ -97,16 +97,16 @@ export class RegisterPage implements OnInit {
 
   cambiogenero($event){
     this._gender = this.gender;
-      console.log('this.gender:', this._gender);
+      /* console.log('this.gender:', this._gender); */
      
   }
   cambioDocumento($event){
    this._documenType = this.document;
-   console.log('this.document', this._documenType);
+  /*  console.log('this.document', this._documenType); */
   }
 
   aceptaCondiciones(aprobed){
-    console.log('aprobed', aprobed);
+    /* console.log('aprobed', aprobed); */
   }
 
   async seeConditions(){
@@ -124,10 +124,10 @@ export class RegisterPage implements OnInit {
 
   async openPopover(){
     const data = this.registerForm.value;
-    console.log('data en el modal:', data);
+    /* console.log('data en el modal:', data); */
     const email = data.email
     this.crudSrv.validateEmail(email).subscribe(async (res) =>{
-      console.log(res);
+      /* console.log(res); */
         const popover = await this.popoverCtrl.create({
           component: ModalCodeComponent,
           componentProps: {
@@ -146,13 +146,10 @@ export class RegisterPage implements OnInit {
           }
         ]
        });
-       console.log(err);
+       /* console.log(err); */
        await alert.present();
    })
   }
- 
-
-   
     
     goToLogin(){
       this.routes.navigate(['login']);

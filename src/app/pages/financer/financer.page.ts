@@ -47,8 +47,8 @@ export class FinancerPage implements OnInit {
     this.doctor = this.dataArmada.doctor;
     this.subida = this.dataArmada.hora.listjson;
     /* this.available = this.dataArmada. */
-    console.log('dataArmada en financer:', this.dataArmada);
-    console.log('dataArmada en doctor:', this.dataArmada.doctor);
+   /*  console.log('dataArmada en financer:', this.dataArmada);
+    console.log('dataArmada en doctor:', this.dataArmada.doctor); */
 
     if(this.dataArmada){
       this.getPlanesPacienteConPrecio();

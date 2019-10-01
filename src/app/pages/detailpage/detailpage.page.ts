@@ -25,12 +25,12 @@ export class DetailpagePage implements OnInit {
   ngOnInit() {
     this.data = this.routes.snapshot.paramMap.get('datosObj');
     this.dataArmada = JSON.parse(this.data);
-    console.log(this.dataArmada);
+    /* console.log(this.dataArmada); */
     this.date = this.dataArmada.appointmentId;
   }
 
-  async desactivateTask(){
-    console.log('el id a eliminar:',this.date);
+  async desactivateTask(date){
+   /*  console.log('el id a eliminar:',this.date); */
     const confirm = await this.alertCtrl.create({
       header: 'ELMINAR',
       message: '¿Estas seguro de eliminar esta cita?',

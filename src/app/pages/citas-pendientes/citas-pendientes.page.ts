@@ -20,18 +20,15 @@ export class CitasPendientesPage implements OnInit {
   }
 
   ngOnInit() {
-    console.log('citas-pendientes page');
+    /* console.log('citas-pendientes page'); */
     this.appointmetSrv.getAppointmentsPeruser().subscribe(data =>{
       return this.dates = data;
     })
   }
 
- 
-  
-
   goToDetailDate(date){
     const datosObj = JSON.stringify(date);
-    console.log('data armada', datosObj);
+   /*  console.log('data armada', datosObj); */
     this.routes.navigate(['detailpage', datosObj]);
   }
 

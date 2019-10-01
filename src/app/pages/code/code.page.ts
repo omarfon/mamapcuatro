@@ -40,8 +40,8 @@ export class CodePage implements OnInit {
       tercero : [],
       cuarto  : []
   });
-  console.log(this.formCode.value);
-  console.log(this.formCode.value.primero);
+  /* console.log(this.formCode.value);
+  console.log(this.formCode.value.primero); */
   }
 
   saveData(){
@@ -57,7 +57,7 @@ export class CodePage implements OnInit {
     console.log('data armada:', this.datos);
     this.crudSrv.createNewUser(this.datos).subscribe(async (data:any) =>{
       this.createOk = data;
-      console.log('la vuelta de this.createOK:', this.createOk);
+      /* console.log('la vuelta de this.createOK:', this.createOk); */
         if( this.createOk.ok == false ){
               const alert = await this.alertCtrl.create({
                 header:'Error en el envio del código',
@@ -74,7 +74,7 @@ export class CodePage implements OnInit {
           });
           await loading.present();
         this.createOk = data;
-           console.log('datos que vienen del logueo: por registro:', this.createOk);
+           /* console.log('datos que vienen del logueo: por registro:', this.createOk); */
              localStorage.setItem('idTokenUser', this.createOk.patientId);
              localStorage.setItem('emailUser', this.createOk.userEmail);
              localStorage.setItem('authorization', this.createOk.authorization);
@@ -105,7 +105,7 @@ export class CodePage implements OnInit {
     let email = {email:this.datos.email}
       this.crudSrv.validateEmail(email).subscribe(data=>{
           this.code = data;
-          console.log('lo que me llega del vaildate:', this.code)
+          /* console.log('lo que me llega del vaildate:', this.code) */
       });
   }
 }

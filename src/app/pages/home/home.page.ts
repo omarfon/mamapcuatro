@@ -67,7 +67,7 @@ export class HomePage implements OnInit {
 
   calculoFecha(){
     
-      console.log('parametros:', this.params);
+      /* console.log('parametros:', this.params); */
 
       this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
       this.today = moment();
@@ -83,17 +83,17 @@ export class HomePage implements OnInit {
       /* cuanto tiempo ha pasado desde la concepcion */
       const start = moment(this.fecha);
       const cuanto = start.fromNow(true);
-      console.log('cuanto', cuanto);
+      /* console.log('cuanto', cuanto); */
 
       /*   aqui les sumamos las 40 semanas a la fecha inicial para poder tener el ultimo dia de parto */
       const posible = start.add(40, 'w');
       this.posible = posible;
       const posibleDays = posible.diff(this.today, 'd');
-      console.log('posibleDays:', posibleDays);
+      /* console.log('posibleDays:', posibleDays); */
       this.fechaPosible = posible.diff(this.today, 'w');
       const diasFaltantes =  posibleDays - (this.fechaPosible * 7) ;
       this.diasFaltantes = diasFaltantes;
-      console.log('diasFaltantes:', diasFaltantes);
+      /* console.log('diasFaltantes:', diasFaltantes); */
      
      this.cantidad = this.total; 
 
@@ -102,12 +102,12 @@ export class HomePage implements OnInit {
       if (!this.notasFiltro) {
         this.notasServ.getNotes().subscribe(data => {
           this.notas = data;
-          console.log('todas las notas:', this.notas);
+          /* console.log('todas las notas:', this.notas); */
         });
       } else {
         let elfilter = this.notasFiltro;
         this.notasServ.getNotesFilter(elfilter).subscribe(data => {
-          console.log('lo que me llega del filtro:', data);
+          /* console.log('lo que me llega del filtro:', data); */
           this.notas = data
           // console.log(this.notas);
         });
@@ -131,7 +131,7 @@ export class HomePage implements OnInit {
   }
 
   async openFilters(ev:any){
-    console.log('abrir filtros');
+    /* console.log('abrir filtros'); */
     const popover = await this.popover.create({
       component: FiterComponent,
       event: ev,

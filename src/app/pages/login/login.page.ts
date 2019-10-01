@@ -56,10 +56,10 @@ export class LoginPage implements OnInit {
   }
 
   doSignIn(email, password){
-    console.log(email, password)
+    /* console.log(email, password) */
     this.userSrv.doSignIn(email, password).subscribe(response =>{
        this.data = response;
-      console.log('lo que me trae el login:', this.data);
+      /* console.log('lo que me trae el login:', this.data); */
 
        localStorage.setItem('usuario', this.data.userEmail);
        localStorage.setItem('email', this.data.userEmail);
@@ -74,9 +74,9 @@ export class LoginPage implements OnInit {
 
        this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
         this._startPregnancy = data.fecha_ultima_regla;
-        console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy);
+        /* console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy); */
         this.startPregnancy = this._startPregnancy;
-        console.log('this.startPregnancy de login:', this.startPregnancy);
+        /* console.log('this.startPregnancy de login:', this.startPregnancy); */
         if(this.startPregnancy){
           localStorage.setItem('startPregnancy', this.startPregnancy);
         }else{

@@ -22,7 +22,7 @@ export class EvolucionPage implements OnInit {
 
   }
       goToDetailWeek(evo){
-        console.log('lo que me viene en evo:', evo);
+        /* console.log('lo que me viene en evo:', evo); */
         const evolucion = evo.semana;
         this.routes.navigate(['detail-week', {evo:evolucion}])
 

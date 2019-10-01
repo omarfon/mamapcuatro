@@ -70,7 +70,7 @@ export class ResumenPage implements OnInit {
 
       const data = this.routes.snapshot.paramMap.get('datosObj');
       this.dataArmada = JSON.parse(data);
-      console.log('dataArmada en resumen:', this.dataArmada);
+      /* console.log('dataArmada en resumen:', this.dataArmada); */
       this.hora = this.dataArmada.hora;
       this.doctor = this.dataArmada.doctor;
       this.price = this.dataArmada.plan.precio[0].total;
@@ -80,7 +80,7 @@ export class ResumenPage implements OnInit {
   }
   
   async culqi(){
-    console.log('culqi del componente', this);
+    /* console.log('culqi del componente', this); */
     if(window['Culqi'].token){
       const getSettings = window['Culqi'].getSettings;
       const metadata = {
@@ -97,7 +97,7 @@ export class ResumenPage implements OnInit {
         source_id : window['Culqi'].token.id,
         metadata
       }
-      console.log('data:', data);
+     /*  console.log('data:', data); */
       const loading = await this.loadCtrl.create({
           message:'pagando cita'
       });
@@ -105,7 +105,7 @@ export class ResumenPage implements OnInit {
       this.payCulqiCharges = true;
       const self = this;
         this.culqiPrv.charges(data).subscribe( async (vuelta:any) =>{
-          console.log('data', vuelta);
+          /* console.log('data', vuelta); */
           loading.dismiss();
           this.payCulqiCharges = true;
           if(vuelta.message == "ok"){
@@ -122,7 +122,7 @@ export class ResumenPage implements OnInit {
             });
             await alert.present();
           }else{
-            console.log('data', vuelta);
+            /* console.log('data', vuelta); */
             this.alertError = this.alertCtrl.create({
                 header:'error en tarjeta',
                 subHeader: 'problema en el cargo en su tarjeta',
@@ -156,7 +156,7 @@ export class ResumenPage implements OnInit {
           }
         });
     }else{
-      console.log('token error', window['Culqi'].error);
+      /* console.log('token error', window['Culqi'].error); */
 
     }
   }
@@ -181,14 +181,14 @@ export class ResumenPage implements OnInit {
     let appointment = this.currentAppointment;
     
     if(this.currentAppointment){
-      console.log('this.plan', this.plan);
+     /*  console.log('this.plan', this.plan); */
       const settings = {
         title : this.plan.plan_desc,
         description:this.plan.precio[0].prest_item_desc,
         currency: "PEN",
         amount: this.price * 100
       };
-      console.log('settings:', settings);
+      /* console.log('settings:', settings); */
 
       window['Culqi'].options({
         style:{
@@ -197,7 +197,7 @@ export class ResumenPage implements OnInit {
       }) 
     window['Culqi'].settings(settings);
 
-    console.log("open CUlqi", settings);
+    /* console.log("open CUlqi", settings); */
     const metadata = {
       patientId:this.currentAppointment.patient.id,
       appointmentId:this.currentAppointment.appointmentId,
@@ -205,17 +205,17 @@ export class ResumenPage implements OnInit {
       precioSinIGV:this.plan.precio[0].prest_precio_val,
       precioConIGV:this.plan.precio[0].total
     }
-    console.log('metadata:', metadata);
+    /* console.log('metadata:', metadata); */
     window['Culqi'].open();
     const i = setInterval(async ()=> {
       const culqiObj = window['Culqi'];
-      console.log(culqiObj);
+      /* console.log(culqiObj); */
       if (culqiObj['closeEvent'] != null) {
         console.log('Formulario culqi cerrado', culqiObj['closeEvent']);
         clearInterval(i);
       }
       if (culqiObj['error'] != undefined){
-        console.log('Formulario culqi error', culqiObj['error']);
+        /* console.log('Formulario culqi error', culqiObj['error']); */
         clearInterval(i);
         const alert = await this.alertCtrl.create({
           header:'error al hacer cargo',
@@ -256,9 +256,9 @@ export class ResumenPage implements OnInit {
 
   payCulqi() {
     this.desactivadoBoton = false;
-      console.log('this.price:', this.price);
+      /* console.log('this.price:', this.price); */
       if(this.currentAppointment){
-        console.log('this.currentAppoinment:', this.currentAppointment);
+        /* console.log('this.currentAppoinment:', this.currentAppointment); */
         this.payCulqiCharges = true;
         this.openCulqi();
         return 
@@ -268,7 +268,7 @@ export class ResumenPage implements OnInit {
       this.appointmentProvider.createAppointment(this.subida, provisionId)
         .subscribe((data: any) => {
           this.currentAppointment = data;
-          console.log('currentAppointment:', this.currentAppointment);
+          /* console.log('currentAppointment:', this.currentAppointment); */
           this.openCulqi();
         }, err => {
             if (this.currentAppointment !== null) {
@@ -398,7 +398,7 @@ export class ResumenPage implements OnInit {
     let provisionId = this.hora.params.provisionId;
     this.desactivadoBotonLocal = false;
       this.appointmentProvider.createAppointment(this.subida , provisionId).subscribe(async (data:any) => {
-        console.log('data devuelta:', data);
+        /* console.log('data devuelta:', data); */
         if(data.ok == false){
           const alert = await this.alertCtrl.create({
               header:"Problema de reserva",
@@ -446,7 +446,7 @@ export class ResumenPage implements OnInit {
   async gotosave(){
     this.desactivadoBotonLocal = false;
     const providerId = this.hora.params.provisionId;
-    console.log('this.providerId:', providerId);
+    /* console.log('this.providerId:', providerId); */
     this.appointmentProvider.createAppointment(this.subida, providerId).subscribe(async (data: any) => {
       // console.log('data de masterDetail:', data);
       const loading = await this.loadCtrl.create({

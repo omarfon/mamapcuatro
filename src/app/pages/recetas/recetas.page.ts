@@ -19,7 +19,7 @@ export class RecetasPage implements OnInit {
   ngOnInit() {
     this.recipeSrv.getAllRecipes().subscribe(data =>{
       this.recipes = data;
-      console.log(this.recipes);
+     /*  console.log(this.recipes); */
     });
   }
 
