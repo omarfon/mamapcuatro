@@ -56,25 +56,25 @@
                       
                 </div>
 
-                <div *ngIf="!planes">
-                  <ion-list>
-                      <ion-item>
-                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                          <ion-skeleton-text animated></ion-skeleton-text>
-                      </ion-item>
-                      <ion-item>
-                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                          <ion-skeleton-text animated></ion-skeleton-text>
-                      </ion-item>
-                      <ion-item>
-                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
-                          <ion-skeleton-text animated></ion-skeleton-text>
-                      </ion-item>
-                  </ion-list>  
-                </div>
               </ion-radio-group>
             </ion-list>  
           </div>
+                      <div *ngIf="!planes">
+                        <ion-list>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 750%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                        </ion-list>  
+                      </div>
  </div>
   <ion-button 
           *ngIf="financer == true"
