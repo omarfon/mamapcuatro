@@ -39,7 +39,7 @@
                     </ion-item>
                   </ion-card> 
 
-                      <ion-list *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
+                      <ion-list  *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
                         <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
                         <ion-card *ngFor="let beneficio of plan.beneficios">
                           <ion-item class="bloques" no-lines>
