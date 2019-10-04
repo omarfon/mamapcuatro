@@ -28,6 +28,7 @@ export class CitasPage implements OnInit {
 
   public available;
 
+
   itemExpanded: boolean = true;
   itemExpandHeight: number = 220;
   changueColor: Boolean = false;
@@ -54,14 +55,14 @@ export class CitasPage implements OnInit {
   }
 
   async getDoctors(){
-      const loading = await this.loadingCtrl.create({
+      /* const loading = await this.loadingCtrl.create({
         message: 'Cargando doctores...'
-      });
-      await loading.present();
+      }); */
+      /* await loading.present(); */
           forkJoin(this.citasSrv.getServicios()).subscribe ( servicios =>{
           this.servicios = servicios;
         });
-        loading.dismiss();
+        /* loading.dismiss(); */
         
         this.citasSrv.getDoctorsPerId(this.id).subscribe(doctors => {
           this.disponibles = false;

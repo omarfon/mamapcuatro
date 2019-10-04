@@ -10,6 +10,7 @@
 <ion-content>
   <div class="containerPay">
     <h3 class="centerTitle">Como quieres pagar?</h3>
+    <p class="textoIndicador">A continuación escoge una de las opciones de financiamiento, para luego ir a pago, ya casi terminamos...</p> 
       
           <div class="contenedorPagadores" *ngIf= "planes">
             <ion-list no-lines>
@@ -53,6 +54,23 @@
                    <!--        <hr> -->
                         </ion-list>
                       
+                </div>
+
+                <div *ngIf="!planes">
+                  <ion-list>
+                      <ion-item>
+                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                          <ion-skeleton-text animated></ion-skeleton-text>
+                      </ion-item>
+                      <ion-item>
+                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                          <ion-skeleton-text animated></ion-skeleton-text>
+                      </ion-item>
+                      <ion-item>
+                          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                          <ion-skeleton-text animated></ion-skeleton-text>
+                      </ion-item>
+                  </ion-list>  
                 </div>
               </ion-radio-group>
             </ion-list>  

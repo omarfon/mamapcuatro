@@ -6,7 +6,7 @@ import { DatosControlService } from '../../service/datos-control.service';
 import { PopoverController } from '@ionic/angular';
 import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fecha-pregnancy.component';
 import { FiterComponent } from '../../components/fiter/fiter.component';
-
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-home',
@@ -45,12 +45,17 @@ export class HomePage implements OnInit {
   constructor( public router : Router,
               public notasServ: NotasService,
               public datosPvr: DatosControlService,
-              public popover: PopoverController) {
+              public popover: PopoverController,
+              private fcm: FCM) {
 
                 
                }
 
     async ngOnInit() {
+
+      this.fcm.getToken().then(token => {
+        console.log(token)
+      });
 
     let cargaPublic = localStorage.getItem('role');
     /* const start = localStorage.getItem('startPregnancy') */

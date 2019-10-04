@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
-
+import { FCM } from '@ionic-native/fcm/ngx';
 
 registerLocaleData(localeEs);
 
@@ -59,6 +59,7 @@ const firebaseConfig = {
             ],
   providers: [
     StatusBar,
+    FCM,
     SplashScreen,
     {provide: LOCALE_ID, useValue: "es"},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
