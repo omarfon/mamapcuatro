@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { FinancerPage } from './financer.page';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { InfonopagoComponent } from 'src/app/components/infonopago/infonopago.component';
+
 
 const routes: Routes = [
   {
@@ -15,11 +18,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  entryComponents:[
+    InfonopagoComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ComponentsModule,
   ],
   declarations: [FinancerPage]
 })

@@ -2,9 +2,10 @@ import { FinancerService } from './../../service/financer.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppointmentService } from '../../service/appointment.service';
-import { AlertController, LoadingController} from '@ionic/angular';
+import { AlertController, LoadingController, PopoverController} from '@ionic/angular';
 import { DataFinancerService } from '../../resolver/data-financer.service';
-
+import { InfonopagoComponent } from 'src/app/components/infonopago/infonopago.component';
+import { popoverController } from '@ionic/core';
 
 
 
@@ -30,6 +31,7 @@ export class FinancerPage implements OnInit {
   public dataArmada;
   desactivadoBotonLocal: boolean;
   public financer: boolean;
+  public disabled: boolean = false;
 
   constructor(public routes : Router,
               public route: ActivatedRoute,
@@ -38,7 +40,8 @@ export class FinancerPage implements OnInit {
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController,
               public financerdatSrv: DataFinancerService,
-              public appointmentProvider: AppointmentService) { }
+              public appointmentProvider: AppointmentService,
+              public popover: PopoverController) { }
 
   ngOnInit() {
     const data = this.route.snapshot.paramMap.get('datosObj');
@@ -65,6 +68,16 @@ export class FinancerPage implements OnInit {
     this.financerSrv.getPlanesPaciente(centerId , servicio_id, prestacion_id , medico_id , proposedate ).subscribe(data =>{
       this.planes = data;
       console.log('this.planes:', this.planes);
+      /* if(this.planes){
+        if(this.planes.cuotas[0].countCuotas < 1){
+          this.disabled = true;  
+        }else{
+          this.disabled = false;
+        }
+        console.log(this.disabled)
+      }else{
+        console.log('aun no hay planes');
+      } */
     });
   }
 
@@ -198,6 +211,12 @@ export class FinancerPage implements OnInit {
     });  
   }
 
-  
+  async openModalInfo(){
+    const popover = await this.popover.create({
+        component:InfonopagoComponent,
+      })
+      await popover.present();
+    }
+     
 
 }

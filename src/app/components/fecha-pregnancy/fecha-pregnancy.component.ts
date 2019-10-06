@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 
@@ -9,13 +9,11 @@ import { PopoverController } from '@ionic/angular';
 })
 export class FechaPregnancyComponent implements OnInit {
 
-
   constructor(public router: Router, public popoverCtrl: PopoverController) { }
 
   ngOnInit() {}
 
   saveDate(nombre, fechaManual){
-    
     localStorage.setItem('patientName', nombre.value);
     localStorage.setItem('startPregnancy', fechaManual.value);
     this.popoverCtrl.dismiss()
@@ -23,5 +21,14 @@ export class FechaPregnancyComponent implements OnInit {
     
     console.log( fechaManual, fechaManual.value);
   }
+
+  /* validate(){
+    if(nombre != "" && fechaManual != ""){
+      return true
+    }else{
+      return false
+    }
+
+  } */
 
 }

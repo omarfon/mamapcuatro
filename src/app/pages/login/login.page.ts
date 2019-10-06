@@ -164,7 +164,7 @@ export class LoginPage implements OnInit {
   async goTohome(){
     const popover = await this.popover.create({
       component:FechaPregnancyComponent,
-      backdropDismiss: false
+      backdropDismiss: true
     })
     await popover.present();
     /* this.router.navigate(['tabs']); */
