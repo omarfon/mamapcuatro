@@ -205,10 +205,16 @@ a:hover {
   text-align: center;
 }
 .cardDoctor{
-    margin-top:0!important;
-    margin-bottom:2px;
+    margin-top:2px!important;
+    margin-bottom:5px;
     --background:#fff!important;
     border-top-right-radius: 30px;
+}
+.cardDoctorheight{
+    margin-bottom:5px;
+    --background:#fff!important;
+    border-top-right-radius: 30px;
+    height: 180px;
 }
 mat-expansion-panel-header{
     height: 80px!important;
@@ -233,5 +239,10 @@ span .mat-expansion-indicator::after{
 mat-expansion-panel-header{
     width: 100%!important;
     padding:0;
+}
+
+//skeleton
+ion-skeleton-text{
+    margin-bottom:10px;
 }
 

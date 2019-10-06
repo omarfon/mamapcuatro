@@ -10,6 +10,7 @@
 <ion-content>
   <div class="containerPay">
     <h3 class="centerTitle">Como quieres pagar?</h3>
+    <p class="textoIndicador">A continuación escoge una de las opciones de financiamiento, para luego ir a pago, ya casi terminamos...</p> 
       
           <div class="contenedorPagadores" *ngIf= "planes">
             <ion-list no-lines>
@@ -38,7 +39,7 @@
                     </ion-item>
                   </ion-card> 
 
-                      <ion-list *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
+                      <ion-list  *ngIf="plan.es_paquete_propio == 1 && plan.es_plan_propio == 0" no-lines>
                         <h4 class="tituloPlanes">{{plan.plan_desc}}</h4>
                         <ion-card *ngFor="let beneficio of plan.beneficios">
                           <ion-item class="bloques" no-lines>
@@ -54,9 +55,26 @@
                         </ion-list>
                       
                 </div>
+
               </ion-radio-group>
             </ion-list>  
           </div>
+                      <div *ngIf="!planes">
+                        <ion-list>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                            <ion-card class="cardSkeletonFinancer">
+                                <ion-skeleton-text animated style="width: 750%; height: 20px;"></ion-skeleton-text>
+                                <ion-skeleton-text animated style="width: 60%; height: 20px;"></ion-skeleton-text>
+                            </ion-card>
+                        </ion-list>  
+                      </div>
  </div>
   <ion-button 
           *ngIf="financer == true"

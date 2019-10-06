@@ -32,7 +32,7 @@
                               <ion-col size="1">
                               </ion-col>
                                 <ion-col size="7"  >
-                                    <p class="nSemanas">{{ totaldias |slice:0:2}}</p>
+                                    <p class="nSemanas">{{ totaldias |slice:0:2 }}</p>
                                     <p class="pSemanas">Semanas</p>
                                 </ion-col>
                                 <ion-col size="4" >
@@ -50,14 +50,14 @@
     
                 <!-- card para el calculo manual de embarazo, sino tienes cuenta , este es el que debería usarse -->
                 <ion-col size="6" >
-                <ion-card class="contenedorFechas"*ngIf="posible" >
+                <ion-card class="contenedorFechas" *ngIf="posible" >
                   <div class="margenTexto">
                     <ion-row>
                       <ion-col size="12">
                         <p class="textoFalta">solo faltan:</p>
                         <ion-row>
                           <ion-col size="6">
-                            <p class="semanasFaltantes">{{fechaPosible}}</p>
+                            <p class="semanasFaltantes">{{fechaPosible }}</p>
                             <p class="textoSemanasFaltantes">semanas</p>
                           </ion-col>
                           <ion-col size="6">
@@ -66,7 +66,7 @@
                           </ion-col>
                           <ion-col size="12">
                             <p class="textoFechaPosible">fecha probable de parto:</p>
-                            <p class="posibleDate">{{posible | date}}</p>  
+                            <p class="posibleDate">{{posible | date }}</p>  
                           </ion-col>
                         </ion-row>
                       </ion-col>
@@ -96,16 +96,7 @@
                                       </ng-template> -->
                   </ion-card>
             </ion-col>
-    
           </ion-row >
-            <ion-refresher (ionRefresh)="doRefresh($event)">
-              <ion-refresher-content
-                pullingIcon="arrow-dropdown"
-                pullingText="Jalar para refrescar"
-                refreshingSpinner="bubbles"
-                refreshingText="Cargando todas las categorías...">
-              </ion-refresher-content>
-            </ion-refresher>
     
           <div *ngFor="let nota of notas">
             <div *ngIf="nota.semana < cantidad + 1" >

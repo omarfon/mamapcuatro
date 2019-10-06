@@ -57,51 +57,67 @@ export class LoginPage implements OnInit {
 
   doSignIn(email, password){
     /* console.log(email, password) */
-    this.userSrv.doSignIn(email, password).subscribe(response =>{
+    this.userSrv.doSignIn(email, password).subscribe(async response =>{
        this.data = response;
-      /* console.log('lo que me trae el login:', this.data); */
-
-       localStorage.setItem('usuario', this.data.userEmail);
-       localStorage.setItem('email', this.data.userEmail);
-       localStorage.setItem('authorization', this.data.authorization);
-       localStorage.setItem('id', this.data.patientId);
-       localStorage.setItem('role', this.data.role);
-       localStorage.setItem('photoUrl', this.data.photoUrl);
-       localStorage.setItem('patientName', this.data.patientName);
-       localStorage.setItem('token', this.data.firebaseToken);
-       /* localStorage.setItem('uid', this.data.userId); */
-       localStorage.setItem('name', this.data.name);
-
-       this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
-        this._startPregnancy = data.fecha_ultima_regla;
-        /* console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy); */
-        this.startPregnancy = this._startPregnancy;
-        /* console.log('this.startPregnancy de login:', this.startPregnancy); */
-        if(this.startPregnancy){
-          localStorage.setItem('startPregnancy', this.startPregnancy);
-        }else{
-          localStorage.setItem('startPregnancy', '2019-05-01');
+       /* console.log('lo que me trae el login:', this.data); */
+       if(this.data.sex == 'HOMBRE'){
+        const alert = await this.alertCtrl.create({
+          header:"No puedes entrar",
+          subHeader:"Solo pueden ingresar a la aplicación mujeres gestantes, intenta con una cuenta que si cumpla los requerimientos",
+          buttons:[
+            {
+              text:'ok',
+              role:'cancel'
+            }
+          ]
+        })
+        await alert.present();
+      }else{
+        localStorage.setItem('usuario', this.data.userEmail);
+        localStorage.setItem('email', this.data.userEmail);
+        localStorage.setItem('authorization', this.data.authorization);
+        localStorage.setItem('id', this.data.patientId);
+        localStorage.setItem('role', this.data.role);
+        localStorage.setItem('photoUrl', this.data.photoUrl);
+        localStorage.setItem('patientName', this.data.patientName);
+        localStorage.setItem('token', this.data.firebaseToken);
+        /* localStorage.setItem('uid', this.data.userId); */
+        localStorage.setItem('name', this.data.name);
+ 
+        this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
+         this._startPregnancy = data.fecha_ultima_regla;
+         /* console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy); */
+         this.startPregnancy = this._startPregnancy;
+         /* console.log('this.startPregnancy de login:', this.startPregnancy); */
+         if(this.startPregnancy){
+           localStorage.setItem('startPregnancy', this.startPregnancy);
+         }else{
+           localStorage.setItem('startPregnancy', '2019-05-01');
+         }
+         // console.log('lo que me trae el login:', localStorage)
+         this.events.publish('change:foto');
+       });
+        /* this.navCtrl.push(TabsPage); */
+        this.router.navigateByUrl('/tabs');
+        
+      }
+      },async error => {
+        const alert = await this.alertCtrl.create({
+          header:'',
+          message: "Email o Password incorrecto",
+          buttons: [{
+            text: "Volver a intentar",
+            handler: data => {
+              // console.log('intentar de nuevo');
+            }
+          }]
+        });
+        await alert.present();
+        // this.msgError = error.message;
+ 
         }
-        // console.log('lo que me trae el login:', localStorage)
-        this.events.publish('change:foto');
-      });
-       /* this.navCtrl.push(TabsPage); */
-       this.router.navigateByUrl('/tabs');
-    },
-    async error => {
-      const alert = await this.alertCtrl.create({
-        header:'',
-        message: "Email o Password incorrecto",
-        buttons: [{
-          text: "Volver a intentar",
-          handler: data => {
-            // console.log('intentar de nuevo');
-          }
-        }]
-      });
-      await alert.present();
-  		// this.msgError = error.message;
-    });
+
+    );
 
   }
 
