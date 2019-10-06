@@ -4,7 +4,7 @@ import { CitasService } from './../../service/citas.service';
 import { LoadingController, NavController } from '@ionic/angular';
 import * as moment from 'moment';
 import { FinancerdatesService } from '../../service/financerdates.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-citas',
@@ -27,6 +27,7 @@ export class CitasPage implements OnInit {
   hora: any;
 
   public available;
+  public complete: boolean = false;
 
 
   itemExpanded: boolean = true;
@@ -59,7 +60,7 @@ export class CitasPage implements OnInit {
         message: 'Cargando doctores...'
       }); */
       /* await loading.present(); */
-          forkJoin(this.citasSrv.getServicios()).subscribe ( servicios =>{
+          this.citasSrv.getServicios().subscribe( servicios =>{
           this.servicios = servicios;
         });
         /* loading.dismiss(); */
@@ -70,7 +71,7 @@ export class CitasPage implements OnInit {
             this.disponibles = true;
             return null;
           }
-          /* console.log(doctors); */
+          console.log(doctors);
           this.doctors = doctors;
           for(let doctor of doctors){
             this.citasSrv.getAvailablesPerDoctor(doctor.id, doctor.service.id, this.fromDate, this.toDate).subscribe((availables:any) => {
@@ -82,6 +83,7 @@ export class CitasPage implements OnInit {
             })
           }
           this.doctorsF = this.doctors;
+          console.log(this.doctorsF);
           /* console.log('this.doctors:', this.doctors); */
         });
   }

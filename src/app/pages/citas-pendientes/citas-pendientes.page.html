@@ -9,7 +9,6 @@
 
 <ion-content>
 
-    <p class="sincitasPendientes" *ngIf="!dates ">No tienes citas pendientes</p>
   <div *ngFor="let date of dates">
     <ion-card class="tarjetaResumen" (click)="goToDetailDate(date)">
       <ion-row>
@@ -29,4 +28,5 @@
       </ion-row>
     </ion-card>
   </div>
+  <p class="sincitasPendientes" *ngIf="dates.length < 1">No tienes citas pendientes</p>
 </ion-content>

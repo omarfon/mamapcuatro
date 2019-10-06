@@ -154,7 +154,7 @@ a {
 .gris {
     background: red;
 }
-.mat-expansion-indicator ng-tns-c3-25 ng-trigger ng-trigger-indicatorRotate ng-star-inserted {
+span .mat-expansion-indicator {
     color: #007198!important;
     display: none!important;
 }
@@ -229,11 +229,13 @@ mat-expansion-panel{
 .contenedorHoras{
     height: 50px;
 }
-.mat-expansion-indicator .ng-tns-c3-25 .ng-trigger .ng-trigger-indicatorRotate .ng-star-inserted{
+.mat-expansion-indicator{
     display: none;
+    color: transparent!important
 }
-span .mat-expansion-indicator::after{
+.mat-expansion-indicator::after{
     display: none!important;
+    color: transparent!important;
 }
 
 mat-expansion-panel-header{

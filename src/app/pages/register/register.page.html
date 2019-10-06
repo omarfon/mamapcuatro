@@ -56,7 +56,7 @@
                 </div>
               </ion-col>
     
-          <ion-col size="12">
+          <!-- <ion-col size="12">
             <ion-item no-lines>
               <ion-select formControlName="gender" name="gender" placeholder="Sexo" [(ngModel)]="gender" (ionChange)="cambiogenero($event)">
                 <ion-select-option *ngFor="let gender of genders" [value]="gender" >{{gender.name}}</ion-select-option>
@@ -65,7 +65,7 @@
                 <div *ngIf="registerForm.get('gender').errors && registerForm.get('gender').dirty || registerForm.get('gender').touched" no-lines>
                   <p *ngIf="registerForm.get('gender').hasError('required')" class="error">Genero requerido</p>
                 </div>
-          </ion-col>
+          </ion-col> -->
     
           <ion-col size="12">
               <ion-item no-lines>
