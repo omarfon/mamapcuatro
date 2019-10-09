@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
   public diasPendientes;
   public diasFaltantes;
   public dataUser: []; 
-  public actualMomento= "active";
+  public actualMomento;
   
 
   constructor( public router : Router,
@@ -59,7 +59,10 @@ export class HomePage implements OnInit {
 
     async ngOnInit() {
 
-      this.estadoActual();
+      this.estado.actualMomento().subscribe((data:any) =>{
+        this.actualMomento = data;
+        console.log(data)
+      })
 
       this.fcm.getToken().then(token => {
         console.log(token)
@@ -83,15 +86,15 @@ export class HomePage implements OnInit {
   }
   
   async estadoActual(){
-    if(this.actualMomento == "updating"){
+    /* if(this.actualMomento == "updating"){
       const alert = await this.alert.create({
           header:"Estamos Actualizando",
           subHeader:"en estos momentos la aplicación esta actulizando.. espera unos minutos por favor...",
           backdropDismiss: false
       });
       await alert.present();
-    }
-    if(this.actualMomento == 'inactive'){
+    } */
+    if(this.actualMomento && this.actualMomento.status == 'active'){
       const alert = await this.alert.create({
         header:"Tenemos Inconvenientes",
         subHeader:"en estos momentos tenemos unos inconvenientes con la aplicaciòn, mil disculpas, prueba en unos minutos mas por favor...",

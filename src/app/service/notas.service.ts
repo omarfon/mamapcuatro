@@ -16,15 +16,20 @@ export class NotasService {
 
 
 
+  /* private apinota */
+
+
+
   constructor(public http: HttpClient) { }
 
   getNotes(){
-    return this.http.get(this.apiUrl + 'notas-por-semana?_sort=semana:desc').pipe(
+    return this.http.get(this.apiUrl ).pipe(
       map((resp:any)=>{
         return resp
       })
     )
   }
+  
   getNotesFilter(elfiltro){
     console.log('el filtro en home:', elfiltro);
     return this.http.get(this.apiUrlFilter + `${elfiltro}?_sort=semana:desc`).pipe(
