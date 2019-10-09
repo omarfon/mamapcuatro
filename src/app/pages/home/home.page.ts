@@ -62,6 +62,8 @@ export class HomePage implements OnInit {
       this.estado.actualMomento().subscribe((data:any) =>{
         this.actualMomento = data;
         console.log(data)
+
+        this.estadoActual();
       })
 
       this.fcm.getToken().then(token => {
@@ -86,18 +88,10 @@ export class HomePage implements OnInit {
   }
   
   async estadoActual(){
-    /* if(this.actualMomento == "updating"){
-      const alert = await this.alert.create({
-          header:"Estamos Actualizando",
-          subHeader:"en estos momentos la aplicación esta actulizando.. espera unos minutos por favor...",
-          backdropDismiss: false
-      });
-      await alert.present();
-    } */
-    if(this.actualMomento && this.actualMomento.status == 'active'){
+    if(this.actualMomento && this.actualMomento.status !== 'active'){
       const alert = await this.alert.create({
         header:"Tenemos Inconvenientes",
-        subHeader:"en estos momentos tenemos unos inconvenientes con la aplicaciòn, mil disculpas, prueba en unos minutos mas por favor...",
+        subHeader:"En estos momentos tenemos algunos inconvenientes con la aplicaciòn, mil disculpas..., prueba en unos minutos mas, por favor!!...",
         backdropDismiss: false
     });
     await alert.present();

@@ -7,7 +7,7 @@ export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/midd
 
 export const API_NOTAS = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/mama/notas";
 
-/* export const firebaseConfig = {
+/* export const firebaseConfig
   apiKey: "AIzaSyC79bO4W3NAW6tjRGe8Y-cx9bK2Nb5t760",
   authDomain: "aviva-mamapp-prod.firebaseapp.com",
   databaseURL: "https://aviva-mamapp-prod.firebaseio.com",
