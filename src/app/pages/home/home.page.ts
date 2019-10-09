@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { NotasService } from '../../service/notas.service';
 import * as moment from 'moment';
 import { DatosControlService } from '../../service/datos-control.service';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, AlertController, ModalController } from '@ionic/angular';
 import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fecha-pregnancy.component';
 import { FiterComponent } from '../../components/fiter/fiter.component';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { EstadoService } from 'src/app/service/estado.service';
+
 
 @Component({
   selector: 'app-home',
@@ -41,17 +43,23 @@ export class HomePage implements OnInit {
   public diasPendientes;
   public diasFaltantes;
   public dataUser: []; 
+  public actualMomento= "active";
+  
 
   constructor( public router : Router,
               public notasServ: NotasService,
               public datosPvr: DatosControlService,
               public popover: PopoverController,
-              private fcm: FCM) {
+              private fcm: FCM,
+              public estado: EstadoService,
+              public alert: AlertController,
+              public modalCtrl: ModalController) {
 
-                
                }
 
     async ngOnInit() {
+
+      this.estadoActual();
 
       this.fcm.getToken().then(token => {
         console.log(token)
@@ -73,12 +81,28 @@ export class HomePage implements OnInit {
         this.calculoFecha();
     }    
   }
+  
+  async estadoActual(){
+    if(this.actualMomento == "updating"){
+      const alert = await this.alert.create({
+          header:"Estamos Actualizando",
+          subHeader:"en estos momentos la aplicación esta actulizando.. espera unos minutos por favor...",
+          backdropDismiss: false
+      });
+      await alert.present();
+    }
+    if(this.actualMomento == 'inactive'){
+      const alert = await this.alert.create({
+        header:"Tenemos Inconvenientes",
+        subHeader:"en estos momentos tenemos unos inconvenientes con la aplicaciòn, mil disculpas, prueba en unos minutos mas por favor...",
+        backdropDismiss: false
+    });
+    await alert.present();
+    }
+  }
 
   calculoFecha(){
-    
       /* console.log('parametros:', this.params); */
-
-      
         this.fecha = moment(localStorage.getItem('startPregnancy')).clone();
         this.today = moment();
   
@@ -106,8 +130,6 @@ export class HomePage implements OnInit {
         /* console.log('diasFaltantes:', diasFaltantes); */
        
        this.cantidad = this.total; 
-  
-  
         this.mostrar = true;
         if (!this.notasFiltro) {
           this.notasServ.getNotes().subscribe(data => {
@@ -123,8 +145,8 @@ export class HomePage implements OnInit {
           });
           this.notasFiltro = this.notas;
         };
-
   }
+
 
   goToChat(){
     this.router.navigateByUrl('/evolucion');

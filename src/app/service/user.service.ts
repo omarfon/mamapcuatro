@@ -51,7 +51,7 @@ export class UserService {
     const authorization = localStorage.getItem('authorization');
     let headers = new HttpHeaders({"Authorization": authorization});
     console.log('params:', params);
-    return this.http.post(this.apiUrl + 'users/validate-email/recovery', params, {headers}).pipe(
+    return this.http.post(this.SERVER + 'users/validate-email/recovery', params, {headers}).pipe(
                     map(data =>{
                       return data
                     })/* .catch(e => {

@@ -13,13 +13,13 @@
 <ion-content>
     <ion-card *ngFor="let recipe of recipes" (click)="goToDetailRecipe(recipe)" class="recetaCard">
         <ion-row>
-          <ion-col col-4>
+          <ion-col size="4">
             <div class="iconoReceta">
               <p class="dia">{{recipe.prescripciones[0].inicio_prescripcion | date:'dd'}}</p>
               <p class="mes">{{recipe.prescripciones[0].inicio_prescripcion | date:'MMMM'}}</p>
             </div>
           </ion-col>
-          <ion-col col-8>
+          <ion-col size="8">
             <p class="especialidad"> Especialidad:</p>
             <p class="resultado">{{recipe.prescripciones[0].servicio}}</p>
             <p class="especialidad">Doctor:</p>

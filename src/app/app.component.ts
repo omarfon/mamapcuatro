@@ -48,20 +48,15 @@ export class AppComponent {
         icon  : "home"
       },
       {
-        title : "Controles",
-        url   : "/citas",
-        icon  : "medkit"
-      },
-      {
         title : "Mis Citas",
         url   : "/citas-pendientes",
         icon  : "alarm"
       },
-      {
+     /*  {
         title : "Graficas",
         url   : "/graficas",
         icon  : "analytics"
-      },
+      }, */
       {
         title : "Recetas",
         url   : "/recetas",

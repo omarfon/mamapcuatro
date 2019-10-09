@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'detailrecipe/:datosObj', loadChildren: './pages/detailrecipe/detailrecipe.module#DetailrecipePageModule' },
   { path: 'start', loadChildren: './pages/start/start.module#StartPageModule' },
   { path: 'code', loadChildren: './pages/code/code.module#CodePageModule' },
+  { path: 'modal-no-service', loadChildren: './pages/modal-no-service/modal-no-service.module#ModalNoServicePageModule' },
 ];
 
 @NgModule({

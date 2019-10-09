@@ -85,21 +85,21 @@ export class LoginPage implements OnInit {
         localStorage.setItem('name', this.data.name);
  
         this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
-         this._startPregnancy = data.fecha_ultima_regla;
+         this.startPregnancy = data.fecha_ultima_regla;
          /* console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy); */
-         this.startPregnancy = this._startPregnancy;
+         /* this.startPregnancy = this._startPregnancy; */
          /* console.log('this.startPregnancy de login:', this.startPregnancy); */
          if(this.startPregnancy){
            localStorage.setItem('startPregnancy', this.startPregnancy);
+           this.router.navigateByUrl('/tabs');
          }else{
-           localStorage.setItem('startPregnancy', '2019-05-01');
+           /* localStorage.setItem('startPregnancy', '2019-05-01'); */
+           console.log('no hay fecha de ultima regla');
+           this.router.navigateByUrl('/tabs');
          }
          // console.log('lo que me trae el login:', localStorage)
          this.events.publish('change:foto');
        });
-        /* this.navCtrl.push(TabsPage); */
-        this.router.navigateByUrl('/tabs');
-        
       }
       },async error => {
         const alert = await this.alertCtrl.create({
@@ -168,6 +168,10 @@ export class LoginPage implements OnInit {
     })
     await popover.present();
     /* this.router.navigate(['tabs']); */
+  }
+
+  recoveryCode(){
+    this.router.navigate(['/code']);
   }
 
 }
