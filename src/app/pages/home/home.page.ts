@@ -62,7 +62,6 @@ export class HomePage implements OnInit {
       this.estado.actualMomento().subscribe((data:any) =>{
         this.actualMomento = data;
         console.log(data)
-
         this.estadoActual();
       })
 
@@ -70,6 +69,7 @@ export class HomePage implements OnInit {
         console.log(token)
       });
 
+      
     let cargaPublic = localStorage.getItem('role');
     /* const start = localStorage.getItem('startPregnancy') */
     if (cargaPublic == 'user') {

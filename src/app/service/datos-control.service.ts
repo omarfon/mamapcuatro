@@ -23,7 +23,6 @@ export class DatosControlService {
       let headers = new HttpHeaders({"Authorization": authorization});
   
     return this.http.get(this.apiUrlStart , {headers}).pipe(
-
                 map(data =>{
                   return data
                 })/* .catch( e =>{

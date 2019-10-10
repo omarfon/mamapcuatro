@@ -45,13 +45,13 @@ export class ChatService {
      }else{
        let token = localStorage.getItem('token')
         return new Promise((resolve, reject)=>{
-          this.ad.auth.signInWithCustomToken(token).then(res =>{
+           this.ad.auth.signInWithCustomToken(token).then(res =>{
              console.log(res);
              localStorage.setItem('uid', res.user.uid )
              if(localStorage.getItem('uid')){
                this.uid = localStorage.getItem('uid');
                this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
-               if( this.uidEnBase = this.uid){
+               if( this.uidEnBase == this.uid){
                  this.id = localStorage.getItem('id');
                  this.email = localStorage.getItem('email');
                  this.db.collection('chatsRooms').doc(this.uid).set({

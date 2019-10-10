@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
     /* console.log(email, password) */
     this.userSrv.doSignIn(email, password).subscribe(async response =>{
        this.data = response;
-       /* console.log('lo que me trae el login:', this.data); */
+       console.log('lo que me trae el login:', this.data);
        if(this.data.sex == 'HOMBRE'){
         const alert = await this.alertCtrl.create({
           header:"No puedes entrar",
@@ -85,16 +85,20 @@ export class LoginPage implements OnInit {
         localStorage.setItem('name', this.data.name);
  
         this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
+          if(!data){
+            /* localStorage.setItem('startPregnancy', '0');
+           console.log('no hay fecha de ultima regla');
+           this.router.navigateByUrl('/tabs'); */
+           this.goTohome()
+           return
+          }
          this.startPregnancy = data.fecha_ultima_regla;
+         
          /* console.log('lo que devuelve el servicio startPregnancy:', this._startPregnancy); */
          /* this.startPregnancy = this._startPregnancy; */
          /* console.log('this.startPregnancy de login:', this.startPregnancy); */
          if(this.startPregnancy){
            localStorage.setItem('startPregnancy', this.startPregnancy);
-           this.router.navigateByUrl('/tabs');
-         }else{
-           /* localStorage.setItem('startPregnancy', '2019-05-01'); */
-           console.log('no hay fecha de ultima regla');
            this.router.navigateByUrl('/tabs');
          }
          // console.log('lo que me trae el login:', localStorage)
