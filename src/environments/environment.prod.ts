@@ -3,10 +3,8 @@ export const environment = {
 };
 
 /* export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/"; */
-export const API_ENDPOINT = "https://api.aviva.pe/middleware2/";
-
-export const API_NOTAS = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/mama/notas";
-
+export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
+export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama/notas";
 /* export const firebaseConfig
   apiKey: "AIzaSyC79bO4W3NAW6tjRGe8Y-cx9bK2Nb5t760",
   authDomain: "aviva-mamapp-prod.firebaseapp.com",
