@@ -62,8 +62,8 @@ export class LoginPage implements OnInit {
        console.log('lo que me trae el login:', this.data);
        if(this.data.sex == 'HOMBRE'){
         const alert = await this.alertCtrl.create({
-          header:"No puedes entrar",
-          subHeader:"Solo pueden ingresar a la aplicación mujeres gestantes, intenta con una cuenta que si cumpla los requerimientos",
+          header:"LO SENTIMOS",
+          subHeader:"Esta aplicación es de uso exclusivo para pacientes de sexo femenino",
           buttons:[
             {
               text:'ok',
