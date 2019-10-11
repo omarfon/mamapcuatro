@@ -7,6 +7,7 @@ import { AlertController, Events } from '@ionic/angular';
 import { DatosControlService } from '../../service/datos-control.service';
 import { TabsPage } from '../../tabs/tabs.page';
 import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
+import { CalcComponent } from 'src/app/components/calc/calc.component';
 
 
 @Component({
@@ -89,7 +90,7 @@ export class LoginPage implements OnInit {
             /* localStorage.setItem('startPregnancy', '0');
            console.log('no hay fecha de ultima regla');
            this.router.navigateByUrl('/tabs'); */
-           this.goTohome()
+           this.goToCalc()
            return
           }
          this.startPregnancy = data.fecha_ultima_regla;
@@ -177,5 +178,15 @@ export class LoginPage implements OnInit {
   recoveryCode(){
     this.router.navigate(['/code']);
   }
+
+  async goToCalc(){
+    const popover = await this.popover.create({
+      component:CalcComponent,
+      backdropDismiss: true
+    })
+    await popover.present();
+    /* this.router.navigate(['tabs']); */
+  }
+
 
 }

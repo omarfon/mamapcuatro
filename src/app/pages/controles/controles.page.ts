@@ -12,6 +12,7 @@ export class ControlesPage implements OnInit {
   fechaIni: any;
   fechaFinal: string;
   encuentros: any;
+  public message:boolean =  false;
 
   constructor(public datosControl: DatosControlService,
               public routes:  Router) { }
@@ -24,9 +25,16 @@ export class ControlesPage implements OnInit {
     this.fechaFinal = fechaFin
 
     this.datosControl.getParams(this.fechaIni, this.fechaFinal).subscribe((data:any) =>{
-      this.encuentros = data.encuentros;
+            if(!data){
+              this.message = true;
+              }else{
+                this.encuentros = data.encuentros;
+              }
+            }, err =>{
+              this.message = true;
+              return
+            });
      //  console.log('los encuentros:', this.encuentros);
-     });
   }
 
   goToDetail(encuentro){

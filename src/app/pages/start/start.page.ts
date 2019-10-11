@@ -11,9 +11,10 @@ export class StartPage implements OnInit {
 
   @ViewChild('slides', {static:true}) slides: IonSlides;
   slideOpts = {
-    initialSlide: 1,
+    initialSlide: 0,
     speed: 400,
-    slideShadows: true
+    slideShadows: true,
+    startAutoplay: true
   };
 
   constructor(public router: Router) { }

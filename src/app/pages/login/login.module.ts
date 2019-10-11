@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPage } from './login.page';
 import { ComponentsModule } from '../../components/components.module';
 import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
+import { CalcComponent } from 'src/app/components/calc/calc.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
 
 @NgModule({
   entryComponents:[
-    FechaPregnancyComponent
+    FechaPregnancyComponent,
+    CalcComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,7 @@ const routes: Routes = [
     ComponentsModule,
     RouterModule.forChild(routes)
   ],
-  exports:[FechaPregnancyComponent],
+  exports:[FechaPregnancyComponent, CalcComponent],
   declarations: [LoginPage]
 })
 export class LoginPageModule {}

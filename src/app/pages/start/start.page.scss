@@ -1,7 +1,7 @@
 .contenedorImagen{
     width: 50%;
     margin-left:20%;
-    margin-top:5%;
+    margin-top:20px;
     margin-bottom:10px;
   }
   .botonRegistro{
@@ -16,6 +16,10 @@
   }
   ion-slides{
     height: 70vh!important;
+      img{
+        width:80%;
+        margin-left:10%;
+      }
   }
   .tituloSlide{
     color:#FFA18B;

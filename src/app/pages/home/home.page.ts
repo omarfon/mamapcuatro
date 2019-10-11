@@ -44,6 +44,7 @@ export class HomePage implements OnInit {
   public diasFaltantes;
   public dataUser: []; 
   public actualMomento;
+  public name;
   
 
   constructor( public router : Router,
@@ -59,6 +60,8 @@ export class HomePage implements OnInit {
 
     async ngOnInit() {
 
+      this.name = localStorage.getItem('patientName')
+
       this.estado.actualMomento().subscribe((data:any) =>{
         this.actualMomento = data;
         console.log(data)
@@ -69,7 +72,7 @@ export class HomePage implements OnInit {
         console.log(token)
       });
 
-      
+
     let cargaPublic = localStorage.getItem('role');
     /* const start = localStorage.getItem('startPregnancy') */
     if (cargaPublic == 'user') {

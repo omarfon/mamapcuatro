@@ -5,13 +5,14 @@ import { ModalCodeComponent } from './modal-code/modal-code.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FiterComponent } from './fiter/fiter.component';
 import { InfonopagoComponent } from './infonopago/infonopago.component';
+import { CalcComponent } from './calc/calc.component';
 
 @NgModule({
   declarations: [FechaPregnancyComponent, 
                  ModalCodeComponent,
                 FiterComponent,
-                InfonopagoComponent
-
+                InfonopagoComponent,
+                CalcComponent
                  ],
   imports: [
     FormsModule,
@@ -22,7 +23,8 @@ import { InfonopagoComponent } from './infonopago/infonopago.component';
     FechaPregnancyComponent,
     ModalCodeComponent,
     FiterComponent,
-    InfonopagoComponent
+    InfonopagoComponent,
+    CalcComponent
 
   ],
   schemas:[
