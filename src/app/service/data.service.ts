@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { API_ENDPOINT } from '../constants';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private SERVER = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+  private SERVER = API_ENDPOINT;
   private apiUrl = `${this.SERVER}users/`;
 
   constructor(public http: HttpClient) { }
