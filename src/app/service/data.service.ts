@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_ENDPOINT } from '../constants';
+import { API_ENDPOINT } from 'src/environments/environment';
 
 
 @Injectable({
