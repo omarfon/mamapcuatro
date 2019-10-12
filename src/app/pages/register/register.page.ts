@@ -73,7 +73,7 @@ export class RegisterPage implements OnInit {
       name: ['',  [ Validators.required ]],
       surname1: ['',  [ Validators.required ]],
       surname2: ['',  [ Validators.required ]],
-      gender: ['',  [ Validators.required ]],
+      /* gender: ['',  [ Validators.required ]], */
       birthdate: ['',  [ Validators.required ]],
       documentType: ['',  [ Validators.required ]],
       documentNumber: ['',  [ Validators.required]],
