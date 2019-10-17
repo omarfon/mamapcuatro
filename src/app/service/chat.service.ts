@@ -38,6 +38,7 @@ export class ChatService {
    }
 
 
+
    registerForCustom(){
      let registrar = localStorage.getItem('uid')
      if(registrar){
@@ -80,25 +81,6 @@ export class ChatService {
      }
    }
    
-
-   
-    /*  registerUser(email, password){
-       return new Promise((resolve, reject)=>{
-         this.ad.auth.createUserWithEmailAndPassword(email , password).then(resolve =>{
-           const uid = resolve.user.uid;
-           this.db.collection('chatsRooms').doc(uid).set({
-             id:uid,
-             name: localStorage.getItem('patientName'),
-             uid: uid
-           }).then(result =>{
-             console.log('resultado de la escritura:', result);
-           }).catch(err =>{
-             console.log(err, 'error de no escritura');
-           })
-       }).catch(err => reject(err));
-     });
-     } */
-   
      loginEmailUser(email, password){
          return new Promise((resolve, reject)=>{
            this.ad.auth.signInWithEmailAndPassword(email, password)
@@ -108,5 +90,14 @@ export class ChatService {
      }
      registerChatRoom(){
        /* this.db.collection('chatsRooms').add() */
+     } 
+
+     registerToken(token){
+       this.uid = localStorage.getItem('uid');
+        this.db.collection('chatsRooms').doc(this.uid).set({
+          fcmToken:{
+            token:token
+          }
+        })
      }
 }

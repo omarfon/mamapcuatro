@@ -8,7 +8,7 @@ export const environment = {
 };
 
 /* ENDPOINTS DESARROLLO */
-/* export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
+export const API_ENDPOINT = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/";
 export const API_NOTAS = "https://dappapache02.eastus.cloudapp.azure.com/middleware2-copy/api/v2/mama/notas";
 
 export const firebaseConfig = {
@@ -19,10 +19,10 @@ export const firebaseConfig = {
   storageBucket: "aviva-mamapp-dev.appspot.com",
   messagingSenderId: "519988913097",
   appId: "1:519988913097:web:dca29f129d59cc0b"
-} */
+}
 
 /* ENDPOINTS PRODUCCION */
-export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
+/* export const API_ENDPOINT = "https://api.aviva.pe/middleware2/api/v2/";
 export const API_NOTAS = "https://api.aviva.pe/middleware2/api/v2/mama/notas";
 
 export const firebaseConfig ={
@@ -33,7 +33,7 @@ export const firebaseConfig ={
   storageBucket: "aviva-mamapp-prod.appspot.com",
   messagingSenderId: "123950719277",
   appId: "1:123950719277:web:331d4e07590df134be73a4"
-} 
+}  */
 
 /*
  * For easier debugging in development mode, you can import the following file

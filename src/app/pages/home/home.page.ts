@@ -8,6 +8,8 @@ import { FechaPregnancyComponent } from 'src/app/components/fecha-pregnancy/fech
 import { FiterComponent } from '../../components/fiter/fiter.component';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { EstadoService } from 'src/app/service/estado.service';
+import { RegisterFcmService } from 'src/app/service/register-fcm.service';
+import { ChatService } from 'src/app/service/chat.service';
 
 
 @Component({
@@ -54,7 +56,9 @@ export class HomePage implements OnInit {
               private fcm: FCM,
               public estado: EstadoService,
               public alert: AlertController,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public registerFcm: RegisterFcmService,
+              public chat: ChatService) {
 
                }
 
@@ -68,9 +72,24 @@ export class HomePage implements OnInit {
         this.estadoActual();
       })
 
-      this.fcm.getToken().then(token => {
-        console.log(token)
+      this.fcm.getToken().then(data => {
+        console.log(data)
+        const token = data;
+        if(token)
+        /* this.registerFcm.registerToken(token).subscribe(data =>{
+          console.log('data retornada de registro:',data);
+        }) */
+        this.chat.registerToken(token);
       });
+
+      this.fcm.onNotification().subscribe(data =>{
+        console.log('data e onNotification:',data);
+        if(data.wasTapped){
+          console.log('tapped');
+        }else{
+          console.log('tap');
+        }
+      })
 
 
     let cargaPublic = localStorage.getItem('role');
