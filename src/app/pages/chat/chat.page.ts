@@ -43,8 +43,8 @@ export class ChatPage implements OnInit {
   
   async mensajePendiente(){
     const alert = await this.alert.create({
-      header: 'trabajando en esta funcionalidad',
-      subHeader:"podrás hablar con tu coach, en unos dias, te avisaremos ni bien este listo...",
+      header: 'Estamos trabajando en esta funcionalidad',
+      subHeader:" La tendremos disponible en unos dias...",
       backdropDismiss:false,
       buttons:[
         {
