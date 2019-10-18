@@ -51,10 +51,10 @@ registerCustom(token){
 
 registerDb(){
   this.uid = localStorage.getItem('uid');
-this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
+  this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
   console.log(this.uid);
   const token = "e2W__JImPb8:APA91bFOQ28-L3tDeWrXauqkSxx1rWMSe59GxbEYGvwEfFpHGlYwi2LaTQ6CYCIL2inlFCy3GZHXqtT4qMPffPko2zMFQrTH1VhCkc3UWJ-xKhRtXJ63PgiKVJR0To3y9R85-8u2hEMH"
-    if(!this.uidEnBase ){
+   
       console.log('no estaba registrado');
                   this.id = localStorage.getItem('id');
                   this.uid = localStorage.getItem('uid');
@@ -73,9 +73,7 @@ this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
                   }).catch(err =>{
                     console.log(err, 'error de no escritura');
                   })
-    }else{
-      console.log('si estaba registrado');
-    }
+   
 }
 
    registerForCustom(){

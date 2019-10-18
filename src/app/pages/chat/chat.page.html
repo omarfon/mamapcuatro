@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content padding>
+
+  <p class="proximamente"> Proximamente....</p>
     <div *ngIf="conversacion">
         <ion-row *ngFor="let mensaje of conversacion.messages">
           <ion-col size="8"  *ngIf="currentUser === mensaje.user" class="message other-message">

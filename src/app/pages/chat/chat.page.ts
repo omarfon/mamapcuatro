@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
-import { IonContent } from '@ionic/angular';
+import { IonContent, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 interface Message {
   content:string
@@ -23,20 +24,41 @@ export class ChatPage implements OnInit {
   currentUser = 'Claudia';
   @ViewChild(IonContent, {static: false}) content: IonContent;
 
-  constructor(public chatSrv: ChatService) {}
+  constructor(public chatSrv: ChatService, 
+              public alert: AlertController,
+              public router: Router) {
 
-  ngOnInit() {
-    if(localStorage.getItem('token') && localStorage.getItem('uid')){
+                this.mensajePendiente();
+              }
+
+  async ngOnInit() {
+   /*  if(localStorage.getItem('token') && localStorage.getItem('uid')){
       this.chatSrv.registerDb();
       this.obtenerConversacion(); 
     }else{
       this.obtenerConversacion();
-    }
+    } */
     
   }
+  
+  async mensajePendiente(){
+    const alert = await this.alert.create({
+      header: 'trabajando en esta funcionalidad',
+      subHeader:"podrás hablar con tu coach, en unos dias, te avisaremos ni bien este listo...",
+      backdropDismiss:false,
+      buttons:[
+        {
+          text:'entiendo',
+          handler:()=>{
+            this.router.navigate(['tabs']);
+          }
+        }
+      ]
+    })
+    await alert.present();
+  }
 
-
-  obtenerConversacion(){
+  /* obtenerConversacion(){
     console.log(this.conversacion);
     const uid = localStorage.getItem('uid');
     this.chatSrv.getChatRoom(uid).subscribe( room =>{
@@ -45,7 +67,7 @@ export class ChatPage implements OnInit {
     })
     setTimeout(()=>{
       this.content.scrollToBottom(300);
-    },300)
+    },300) */
     /* this.fcm.getToken().then(data => {
           console.log(data)
           const token = data;
@@ -53,10 +75,10 @@ export class ChatPage implements OnInit {
             this.chat.registerToken(token);
           }
         }); */
-  }
+ /*  } */
   
 
-  sendMessage(){
+  /* sendMessage(){
     const mensaje : Message ={
       content: this.msg,
       type:'text',
@@ -70,6 +92,6 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{
       this.content.scrollToBottom(300);
     },500)
-  }
+  } */
 
 }
