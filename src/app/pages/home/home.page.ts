@@ -72,15 +72,6 @@ export class HomePage implements OnInit {
         this.estadoActual();
       })
 
-      this.fcm.getToken().then(data => {
-        console.log(data)
-        const token = data;
-        if(token)
-        /* this.registerFcm.registerToken(token).subscribe(data =>{
-          console.log('data retornada de registro:',data);
-        }) */
-        this.chat.registerToken(token);
-      });
 
       this.fcm.onNotification().subscribe(data =>{
         console.log('data e onNotification:',data);
@@ -89,8 +80,9 @@ export class HomePage implements OnInit {
         }else{
           console.log('tap');
         }
-      })
+      }) 
 
+      
 
     let cargaPublic = localStorage.getItem('role');
     /* const start = localStorage.getItem('startPregnancy') */

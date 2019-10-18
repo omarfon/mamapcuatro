@@ -8,6 +8,7 @@ import { DatosControlService } from '../../service/datos-control.service';
 import { TabsPage } from '../../tabs/tabs.page';
 import { FechaPregnancyComponent } from '../../components/fecha-pregnancy/fecha-pregnancy.component';
 import { CalcComponent } from 'src/app/components/calc/calc.component';
+import { ChatService } from 'src/app/service/chat.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class LoginPage implements OnInit {
                public router: Router,
                public events: Events,
                public datosSrv: DatosControlService,
-               public popover: PopoverController) {
+               public popover: PopoverController,
+               public chatSrv: ChatService) {
 
                 const authorization = localStorage.getItem('authorization');
                 
@@ -84,12 +86,13 @@ export class LoginPage implements OnInit {
         localStorage.setItem('token', this.data.firebaseToken);
         /* localStorage.setItem('uid', this.data.userId); */
         localStorage.setItem('name', this.data.name);
+        if(localStorage.getItem('token')){
+          const token = localStorage.getItem('token');
+          this.chatSrv.registerCustom(token);
+        }
  
         this.datosSrv.getStartPregnacy().subscribe((data:any) =>{
           if(!data){
-            /* localStorage.setItem('startPregnancy', '0');
-           console.log('no hay fecha de ultima regla');
-           this.router.navigateByUrl('/tabs'); */
            this.goToCalc()
            return
           }

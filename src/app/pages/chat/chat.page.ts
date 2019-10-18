@@ -26,12 +26,15 @@ export class ChatPage implements OnInit {
   constructor(public chatSrv: ChatService) {}
 
   ngOnInit() {
-    if(localStorage.getItem('token') && !localStorage.getItem('uid')){
-      this.chatSrv.registerForCustom();
+    if(localStorage.getItem('token') && localStorage.getItem('uid')){
+      this.chatSrv.registerDb();
+      this.obtenerConversacion(); 
     }else{
       this.obtenerConversacion();
     }
+    
   }
+
 
   obtenerConversacion(){
     console.log(this.conversacion);
@@ -43,9 +46,16 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{
       this.content.scrollToBottom(300);
     },300)
+    /* this.fcm.getToken().then(data => {
+          console.log(data)
+          const token = data;
+          if(token){
+            this.chat.registerToken(token);
+          }
+        }); */
   }
-
   
+
   sendMessage(){
     const mensaje : Message ={
       content: this.msg,

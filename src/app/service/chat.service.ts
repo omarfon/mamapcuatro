@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase';
+import { tokenName } from '@angular/compiler';
 
 interface Message {
   content:string
@@ -37,7 +38,45 @@ export class ChatService {
      })
    }
 
+registerCustom(token){
+  return new Promise((res, rej)=>{
+    this.ad.auth.signInWithCustomToken(token).then(res =>{
+      console.log('res:',res);
+      localStorage.setItem('uid', res.user.uid);
+    }).catch(err=>{
+      console.log('error:',err);
+    })
+  })
+}
 
+registerDb(){
+  this.uid = localStorage.getItem('uid');
+this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
+  console.log(this.uid);
+  const token = "e2W__JImPb8:APA91bFOQ28-L3tDeWrXauqkSxx1rWMSe59GxbEYGvwEfFpHGlYwi2LaTQ6CYCIL2inlFCy3GZHXqtT4qMPffPko2zMFQrTH1VhCkc3UWJ-xKhRtXJ63PgiKVJR0To3y9R85-8u2hEMH"
+    if(!this.uidEnBase ){
+      console.log('no estaba registrado');
+                  this.id = localStorage.getItem('id');
+                  this.uid = localStorage.getItem('uid');
+                 this.email = localStorage.getItem('email');
+                 this.db.collection('chatsRooms').doc(this.uid).set({
+                   id:this.uid,
+                   name: localStorage.getItem('patientName'),
+                   uid: this.uid,
+                   role: "user",
+                   datos:
+                   {
+                     patientid:this.id,
+                     email:this.email,
+                     token:token,
+                    }
+                  }).catch(err =>{
+                    console.log(err, 'error de no escritura');
+                  })
+    }else{
+      console.log('si estaba registrado');
+    }
+}
 
    registerForCustom(){
      let registrar = localStorage.getItem('uid')
@@ -55,7 +94,7 @@ export class ChatService {
                if( this.uidEnBase == this.uid){
                  this.id = localStorage.getItem('id');
                  this.email = localStorage.getItem('email');
-                 this.db.collection('chatsRooms').doc(this.uid).set({
+                 this.db.collection('chatsRooms').doc(this.uid).update({
                    id:this.uid,
                    name: localStorage.getItem('patientName'),
                    uid: this.uid,
@@ -81,23 +120,26 @@ export class ChatService {
      }
    }
    
-     loginEmailUser(email, password){
+/*      loginEmailUser(email, password){
          return new Promise((resolve, reject)=>{
            this.ad.auth.signInWithEmailAndPassword(email, password)
            .then(userData => resolve(userData)),
            err => (reject(err));
          });
-     }
-     registerChatRoom(){
-       /* this.db.collection('chatsRooms').add() */
-     } 
+     } */
 
-     registerToken(token){
-       this.uid = localStorage.getItem('uid');
-        this.db.collection('chatsRooms').doc(this.uid).set({
-          fcmToken:{
-            token:token
+    /*  registerToken(token){
+       const uid = localStorage.getItem('uid');
+       console.log('token', token);
+       console.log('uid', uid);
+        this.db.collection('chatsRooms').doc(uid).update({
+          datos:{
+            fcmToken:token
           }
+        }).then(result =>{
+          console.log('guardado el fcmToken');
+        }).catch(err =>{
+          console.log('error', err);
         })
-     }
+     } */
 }
