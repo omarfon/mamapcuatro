@@ -27,8 +27,8 @@ export class ChatService {
     public ad: AngularFireAuth) { }
 
     getChatRoom(uid){
-      console.log(uid);
-       return this.db.collection('chatsRooms').doc(uid).valueChanges()
+        console.log(uid);
+        return this.db.collection('chatsRooms').doc(uid).valueChanges()
      }
    
    sendMessageToFirebase(message: Message, chat: string){
@@ -52,31 +52,33 @@ registerCustom(token){
 registerDb(){
   this.uid = localStorage.getItem('uid');
   this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
+  console.log(this.uidEnBase)
   console.log(this.uid);
   const token = "e2W__JImPb8:APA91bFOQ28-L3tDeWrXauqkSxx1rWMSe59GxbEYGvwEfFpHGlYwi2LaTQ6CYCIL2inlFCy3GZHXqtT4qMPffPko2zMFQrTH1VhCkc3UWJ-xKhRtXJ63PgiKVJR0To3y9R85-8u2hEMH"
-   
       console.log('no estaba registrado');
                   this.id = localStorage.getItem('id');
                   this.uid = localStorage.getItem('uid');
-                 this.email = localStorage.getItem('email');
-                 this.db.collection('chatsRooms').doc(this.uid).set({
-                   id:this.uid,
-                   name: localStorage.getItem('patientName'),
+                  this.email = localStorage.getItem('email');
+                  this.db.collection('chatsRooms').doc(this.uid).set({
+                   name: localStorage.getItem('name'),
                    uid: this.uid,
                    role: "user",
-                   datos:
+                   token:token,
+                   data:
                    {
                      patientid:this.id,
                      email:this.email,
-                     token:token,
                     }
-                  }).catch(err =>{
+                  },{merge:true}).catch(err =>{
                     console.log(err, 'error de no escritura');
                   })
-   
-}
+                  /* this.db.collection('chatsRooms').add({
 
-   registerForCustom(){
+                  }) */
+      }
+
+
+   /* registerForCustom(){
      let registrar = localStorage.getItem('uid')
      if(registrar){
        console.log('ya no registrara');
@@ -116,7 +118,7 @@ registerDb(){
           }).catch(err => reject(err))
         });
      }
-   }
+   } */
    
 /*      loginEmailUser(email, password){
          return new Promise((resolve, reject)=>{
