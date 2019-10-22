@@ -54,11 +54,11 @@ export class ChatPage implements OnInit {
     toast.present();
   }
 
-  getPermision(){
+ /*  getPermision(){
     return this.afm.requestToken.pipe(
       tap(token=>(this.token = token))
     );
-  }
+  } */
 
   /* getPermission(){
     this.fcm.getPermision().subscribe();
@@ -91,7 +91,7 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{
       this.content.scrollToBottom(300);
     },300) 
-    /* this.fcm.getToken().then(data => {
+   /*  this.fcm.getToken().then(data => {
           console.log(data)
           const token = data;
           if(token){
