@@ -28,20 +28,20 @@ export class ChatPage implements OnInit {
               public alert: AlertController,
               public router: Router) {
 
-                this.mensajePendiente();
+                /* this.mensajePendiente(); */
               }
 
   async ngOnInit() {
-   /*  if(localStorage.getItem('token') && localStorage.getItem('uid')){
+    if(localStorage.getItem('token') && localStorage.getItem('uid')){
       this.chatSrv.registerDb();
       this.obtenerConversacion(); 
     }else{
       this.obtenerConversacion();
-    } */
+    }
     
   }
   
-  async mensajePendiente(){
+ /*  async mensajePendiente(){
     const alert = await this.alert.create({
       header: 'Estamos trabajando en esta funcionalidad',
       subHeader:" La tendremos disponible en unos dias...",
@@ -56,9 +56,9 @@ export class ChatPage implements OnInit {
       ]
     })
     await alert.present();
-  }
+  } */
 
-  /* obtenerConversacion(){
+  obtenerConversacion(){
     console.log(this.conversacion);
     const uid = localStorage.getItem('uid');
     this.chatSrv.getChatRoom(uid).subscribe( room =>{
@@ -67,7 +67,7 @@ export class ChatPage implements OnInit {
     })
     setTimeout(()=>{
       this.content.scrollToBottom(300);
-    },300) */
+    },300)
     /* this.fcm.getToken().then(data => {
           console.log(data)
           const token = data;
@@ -75,10 +75,10 @@ export class ChatPage implements OnInit {
             this.chat.registerToken(token);
           }
         }); */
- /*  } */
+  }
   
 
-  /* sendMessage(){
+  sendMessage(){
     const mensaje : Message ={
       content: this.msg,
       type:'text',
@@ -92,6 +92,6 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{
       this.content.scrollToBottom(300);
     },500)
-  } */
+  }
 
 }
