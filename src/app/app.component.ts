@@ -4,7 +4,7 @@ import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public routes: Router,
-    private menu: MenuController
+    private menu: MenuController,
+    public fcm: FCM
   ) {
     this.sideMenu();
     this.initializeApp();
@@ -31,10 +32,19 @@ export class AppComponent {
     this.nombre = localStorage.getItem('patientName')
   }
 
-  initializeApp() {
+   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.fcm.onNotification().subscribe(data =>{
+        if(data.wasTapped){
+          //notificaciones recibidas en device primer plano
+          console.log('notificaciones en primer plano');
+        }else{
+          console.log('notificaciones en segundo plano');
+          //Notificaciones recibidas en foreground
+        }
+      })
     });
   }
 
@@ -82,6 +92,7 @@ export class AppComponent {
       localStorage.removeItem('usuario');
       localStorage.removeItem('patientName');
       localStorage.removeItem('token');
+      localStorage.removeItem('uid');
     this.routes.navigate(['/login']);
     this.menu.close('start');
     console.log('cerrar sesión');

@@ -51,10 +51,8 @@ registerCustom(token){
 
 registerDb(){
   this.uid = localStorage.getItem('uid');
-  this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
   console.log(this.uidEnBase)
   console.log(this.uid);
-  const token = "e2W__JImPb8:APA91bFOQ28-L3tDeWrXauqkSxx1rWMSe59GxbEYGvwEfFpHGlYwi2LaTQ6CYCIL2inlFCy3GZHXqtT4qMPffPko2zMFQrTH1VhCkc3UWJ-xKhRtXJ63PgiKVJR0To3y9R85-8u2hEMH"
       console.log('no estaba registrado');
                   this.id = localStorage.getItem('id');
                   this.uid = localStorage.getItem('uid');
@@ -63,7 +61,7 @@ registerDb(){
                    name: localStorage.getItem('name'),
                    uid: this.uid,
                    role: "user",
-                   token:token,
+                   fcmTokens:"",
                    data:
                    {
                      patientid:this.id,
@@ -77,8 +75,22 @@ registerDb(){
                   }) */
       }
 
+      registerToken(token, uid){
+        this.id = localStorage.getItem('id');
+        this.uid = localStorage.getItem('uid');
+        this.email = localStorage.getItem('email');
+        this.db.collection('chatsRooms').doc(uid).set({
+          fcmTokens:token,
+          data:
+          {
+            patientid:this.id,
+            email:this.email,
+          }
+        },{merge:true})
+      }
 
-   /* registerForCustom(){
+
+   registerForCustom(){
      let registrar = localStorage.getItem('uid')
      if(registrar){
        console.log('ya no registrara');
@@ -89,28 +101,7 @@ registerDb(){
              console.log(res);
              localStorage.setItem('uid', res.user.uid )
              if(localStorage.getItem('uid')){
-               this.uid = localStorage.getItem('uid');
-               this.uidEnBase = this.db.collection('chatsRooms').doc(this.uid);
-               if( this.uidEnBase == this.uid){
-                 this.id = localStorage.getItem('id');
-                 this.email = localStorage.getItem('email');
-                 this.db.collection('chatsRooms').doc(this.uid).update({
-                   id:this.uid,
-                   name: localStorage.getItem('patientName'),
-                   uid: this.uid,
-                   role: "user",
-                   datos:
-                   {
-                     patientid:this.id,
-                     email:this.email,
-                    }
-                    
-                  }).then(result =>{
-                    console.log('resultado de la escritura:', res);
-                  }).catch(err =>{
-                    console.log(err, 'error de no escritura');
-                  })
-                }
+                this.registerDb();
               }else{
                 const uid = localStorage.getItem('uid');
                 return this.db.collection('chatsRooms').doc(uid).valueChanges()
@@ -118,7 +109,7 @@ registerDb(){
           }).catch(err => reject(err))
         });
      }
-   } */
+   }
    
 /*      loginEmailUser(email, password){
          return new Promise((resolve, reject)=>{

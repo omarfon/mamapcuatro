@@ -16,6 +16,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth'
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import { firebaseConfig } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -43,8 +44,10 @@ registerLocaleData(localeEs);
             AngularFireModule.initializeApp(firebaseConfig),
             AngularFireAuthModule,
             AngularFirestoreModule,
+            AngularFireMessagingModule,
             ComponentsModule,
-            ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+            /* ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), */
+            ServiceWorkerModule.register('combined-sw.js', { enabled: environment.production })
             ],
   providers: [
     StatusBar,

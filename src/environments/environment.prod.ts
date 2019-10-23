@@ -13,7 +13,8 @@ export const firebaseConfig = {
   projectId: "aviva-mamapp-dev",
   storageBucket: "aviva-mamapp-dev.appspot.com",
   messagingSenderId: "519988913097",
-  appId: "1:519988913097:web:dca29f129d59cc0b"
+  appId: "1:519988913097:web:dca29f129d59cc0b",
+  vapidKey:"BIZwCuS64_s45KDGmn-tGDzZdHaRT3bugWqObg2Mv-K9KtJNTZSpZcyqzxKO16I3aioXYyYGyI8yFQNGCPniKc0"
 } 
 
 /* ENDPOINTS PRODUCCION */

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChatService } from '../../service/chat.service';
 import { IonContent, AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AngularFireMessaging } from '@angular/fire/messaging';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { mergeMap } from 'rxjs/operators';
 
 
 interface Message {
@@ -24,12 +27,15 @@ export class ChatPage implements OnInit {
   public uid;
   currentUser = 'Claudia';
   public token;
+  /* public messaging = firebase.messaging(); */
   @ViewChild(IonContent, {static: false}) content: IonContent;
 
   constructor(public chatSrv: ChatService, 
               public alert: AlertController,
               public router: Router,
-              public toast: ToastController) {
+              public toast: ToastController,
+              public afm: AngularFireMessaging,
+              public fcm: FCM) {
 /* 
                 this.mensajePendiente(); */
               }
@@ -41,28 +47,65 @@ export class ChatPage implements OnInit {
     }else{
       this.obtenerConversacion();
     } 
-  }
   
-  async makeToast(message){
+    this.listen();
+
+    this.requestPushNotificationsPermission();
+
+    this.fcm.onNotification().subscribe(data =>{
+        console.log('data e onNotification:',data);
+        if(data.wasTapped){
+          console.log('tapped');
+        }else{
+          console.log('tap');
+        }
+      }) 
+  }
+
+  
+
+  async makeToast(){
     const toast = await this.toast.create({
-      message,
+      message: "has habilitado las notificaciones de tu coach",
       duration: 5000,
       position: 'top',
       showCloseButton: true,
-      closeButtonText: 'dismiss'
+      closeButtonText: 'Entiendo'
     });
     toast.present();
   }
 
- /*  getPermision(){
-    return this.afm.requestToken.pipe(
-      tap(token=>(this.token = token))
-    );
-  } */
+  requestPushNotificationsPermission() {
+    const uid = localStorage.getItem('uid');
+    this.afm.requestToken
+      .subscribe(
+        (token) => {
+          this.makeToast();
+          console.log('Permission granted! Save to the server!', token);
+          this.chatSrv.registerToken(token, uid);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
 
-  /* getPermission(){
-    this.fcm.getPermision().subscribe();
-  } */
+  }
+
+  deleteToken() {
+    this.afm.getToken
+      .pipe(mergeMap(token => this.afm.deleteToken(token)))
+      .subscribe(
+        (token) => { console.log('Deleted!'); },
+      );
+  }
+
+  listen() {
+    console.log('escuchando');
+    this.afm.messages
+    .subscribe((message) => { console.log(message); });
+  }
+
+
   
   /* async mensajePendiente(){
     const alert = await this.alert.create({
@@ -91,15 +134,9 @@ export class ChatPage implements OnInit {
     setTimeout(()=>{
       this.content.scrollToBottom(300);
     },300) 
-   /*  this.fcm.getToken().then(data => {
-          console.log(data)
-          const token = data;
-          if(token){
-            this.chat.registerToken(token);
-          }
-        }); */
  } 
   
+
   sendMessage(){
     const mensaje : Message ={
       content: this.msg,
