@@ -4,7 +4,7 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "/mamapp/",
+  "scope": "/",
   "orientation":"portrait",
   "lang":"es",
   "start_url": "./?utm_source=web_app_manifest",

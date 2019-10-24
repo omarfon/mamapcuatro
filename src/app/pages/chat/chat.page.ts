@@ -47,10 +47,6 @@ export class ChatPage implements OnInit {
     }else{
       this.obtenerConversacion();
     } 
-  
-    this.listen();
-
-    this.requestPushNotificationsPermission();
 
     this.fcm.onNotification().subscribe(data =>{
         console.log('data e onNotification:',data);
@@ -102,7 +98,7 @@ export class ChatPage implements OnInit {
   listen() {
     console.log('escuchando');
     this.afm.messages
-    .subscribe((message) => { console.log(message); });
+    .subscribe((message) => { console.log('m', message); });
   }
 
 

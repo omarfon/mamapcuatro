@@ -17,7 +17,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth'
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
-import { firebaseConfig } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -41,7 +40,7 @@ registerLocaleData(localeEs);
             HttpClientModule, 
             BrowserAnimationsModule, 
             MaterialModule,
-            AngularFireModule.initializeApp(firebaseConfig),
+            AngularFireModule.initializeApp(environment.firebase),
             AngularFireAuthModule,
             AngularFirestoreModule,
             AngularFireMessagingModule,
